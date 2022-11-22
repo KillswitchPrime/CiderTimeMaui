@@ -1,0 +1,49 @@
+[
+  {
+    "Name": "Bareksten",
+    "Description": "Double-gold medal winning Botanical Gin x 2 from Norway – Bareksten Gin is a product that finds inspiration from the dramatic and scenic nature of the Norwegian West Coast.",
+    "Beverages": [
+      {
+        "Name": "01 Rosmarin & Sitron",
+        "Rating": "2",
+        "Description": "",
+        "Price": "",
+        "Image": ""
+      },
+      {
+        "Name": "04 Klementin & Kanel",
+        "Rating": "9",
+        "Description": "",
+        "Price": "",
+        "Image": ""
+      },
+      {
+        "Name": "Mango Gin Fizz",
+        "Rating": "9",
+        "Description": "",
+        "Price": "",
+        "Image": ""
+      },
+      {
+        "Name": "Passionfruit Gin Fizz",
+        "Rating": "8",
+        "Description": "",
+        "Price": "",
+        "Image": ""
+      }
+    ]
+  },
+  {
+    "Name": "Berentsens",
+    "Description": "I Egersund ligger ett av Norges eldste bryggeri og brusfabrikk, og det eldste operative bryggeriet i Rogaland.",
+    "Beverages": [
+      {
+        "Name": "Peachy Mango",
+        "Rating": "5",
+        "Description": "",
+        "Price": "",
+        "Image": ""
+      }
+    ]
+  }
+]
