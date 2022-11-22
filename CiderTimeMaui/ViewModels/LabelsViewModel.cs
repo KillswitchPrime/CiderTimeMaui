@@ -21,7 +21,15 @@ namespace CiderTimeMaui.ViewModels
         public async Task GetData()
         {
             var data = await _dataStorageService.GetDataFromStorage();
-            var labels = JsonSerializer.Deserialize<List<Label>>(data);
+            var labels = new List<Label>();
+            try
+            {
+                labels = JsonSerializer.Deserialize<List<Label>>(data);
+            }
+            catch (JsonException)
+            {
+                
+            }
 
             foreach (var label in labels)
             {

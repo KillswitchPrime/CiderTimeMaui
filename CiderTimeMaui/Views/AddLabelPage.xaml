@@ -4,8 +4,11 @@
              x:Class="CiderTimeMaui.Views.AddLabelPage"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:AddLabelViewModel"
-             Title="AddLabelPage">
-    <Grid>
+             Title="Add New Label">
+    
+    <Grid RowDefinitions="*,Auto"
+          RowSpacing="0">
+        
         <VerticalStackLayout>
             <HorizontalStackLayout>
                 <Label Text="Name: "/>
@@ -18,6 +21,7 @@
         </VerticalStackLayout>
 
         <Button Command="{Binding AddLabelCommand}"
+                Grid.Row="1"
                 Text="Add Label"
                 Margin="8"/>
     </Grid>
