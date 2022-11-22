@@ -26,7 +26,7 @@
                                  HorizontalOptions="Center"
                                  WidthRequest="200"
                                  HeightRequest="200">
-                    <Image Source="wine-bottles.png"
+                    <Image Source="wine_bottles.png"
                                HorizontalOptions="CenterAndExpand"
                                VerticalOptions="CenterAndExpand"
                                Aspect="AspectFill"/>

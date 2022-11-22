@@ -50,8 +50,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\drink.png" />
-	  <None Remove="Resources\Images\wine-bottles.png" />
 	  <None Remove="Resources\Raw\CiderTimeDataStorage.json" />
+	  <None Remove="Resources\Images\wine_bottles.png" />
 	</ItemGroup>
 
 	<ItemGroup>

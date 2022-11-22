@@ -3,12 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CiderTimeMaui.Views.AddLabelPage"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
-             x:DataType="Label"
+             x:DataType="viewmodel:AddLabelViewModel"
              Title="AddLabelPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Name: "/>
+                <Entry Placeholder="Enter name" Text="{Binding Path=Label.Name, Mode=TwoWay}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Description: "/>
+                <Entry Placeholder="Enter description" Text="{Binding Path=Label.Description, Mode=TwoWay}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <Button Command="{Binding AddLabelCommand}"
+                Text="Add Label"
+                Margin="8"/>
+    </Grid>
 </ContentPage>
