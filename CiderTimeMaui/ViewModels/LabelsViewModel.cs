@@ -8,10 +8,14 @@ using Label = CiderTimeMaui.Models.Label;
 
 namespace CiderTimeMaui.ViewModels
 {
+    [QueryProperty("Label", nameof(Label))]
     public partial class LabelsViewModel : ObservableObject
     {
         public ObservableCollection<Label> Labels { get; } = new();
         private readonly IDataStorageService _dataStorageService;
+
+        [ObservableProperty]
+        Label newLabel;
 
         public LabelsViewModel(IDataStorageService dataStorageService)
         {
@@ -22,14 +26,13 @@ namespace CiderTimeMaui.ViewModels
         {
             var data = await _dataStorageService.GetDataFromStorage();
             var labels = new List<Label>();
+
             try
             {
                 labels = JsonSerializer.Deserialize<List<Label>>(data);
             }
             catch (JsonException)
-            {
-                
-            }
+            {}
 
             foreach (var label in labels)
             {
@@ -47,6 +50,15 @@ namespace CiderTimeMaui.ViewModels
         async Task GoToBeverages()
         {
             await Shell.Current.GoToAsync(nameof(BeveragesPage), true);
+        }
+
+        public async Task AddNewLabel()
+        {
+            Labels.Add(newLabel);
+
+            var dataString = JsonSerializer.Serialize(Labels);
+
+            await _dataStorageService.WriteDataToStorage(dataString);
         }
     }
 }
