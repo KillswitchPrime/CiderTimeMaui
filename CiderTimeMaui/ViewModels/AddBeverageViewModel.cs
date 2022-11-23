@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace CiderTimeMaui.ViewModels
 {
-    [QueryProperty("Guid", nameof(Guid))]
+    [QueryProperty(nameof(Id), "Id")]
     public partial class AddBeverageViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -51,7 +51,7 @@ namespace CiderTimeMaui.ViewModels
 
             await _storageService.WriteDataToStorage(labels);
 
-            await Shell.Current.GoToAsync($"///{nameof(BeveragesPage)}", true);
+            await Shell.Current.GoToAsync($"/{nameof(BeveragesPage)}", true);
         }
     }
 }

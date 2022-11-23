@@ -10,7 +10,7 @@
             <Color x:Key="Accent">#00BCD4</Color>
 
             <Color x:Key="LightBackground">#FAF9F8</Color>
-            <Color x:Key="DarkBackground">Black</Color>
+            <Color x:Key="DarkBackground">DarkSlateGrey</Color>
 
             <Color x:Key="LabelText">#1F1F1F</Color>
             <Color x:Key="LabelTextDark">White</Color>

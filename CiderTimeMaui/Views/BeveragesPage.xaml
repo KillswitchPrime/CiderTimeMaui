@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:BeveragesViewModel"
              xmlns:models="clr-namespace:CiderTimeMaui.Models"
-             Title="Beverages">
+             Title="Drinker">
     <Grid
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
@@ -55,11 +55,9 @@
                                 <VerticalStackLayout
                                     VerticalOptions="Center"
                                     Padding="10">
-                                    <HorizontalStackLayout>
-                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='{0}/10'}"/>
-                                    </HorizontalStackLayout>
-                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Price: {0}'}" />
+                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
+                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='Rating: {0}/10'}"/>
+                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Pris: {0}'}" />
                                     <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />                              
                                 </VerticalStackLayout>
                             </HorizontalStackLayout>
@@ -70,9 +68,10 @@
 
         </CollectionView>
 
-        <Button Text="Add Beverage" 
+        <Button Text="Legg til drink" 
                 Command="{Binding GoToAddBeverageCommand}"
                 Grid.Row="1"
-                Margin="8"/>
+                Margin="8"
+                BackgroundColor="DarkOrange"/>
     </Grid>
 </ContentPage>

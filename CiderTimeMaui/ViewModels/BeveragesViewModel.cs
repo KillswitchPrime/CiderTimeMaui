@@ -17,7 +17,7 @@ namespace CiderTimeMaui.ViewModels
             await Shell.Current.GoToAsync(nameof(AddBeveragePage), true, 
                 new Dictionary<string, object>
                 {
-                    {"Guid", Label.Id}
+                    {"Id", Label.Id}
                 });
         }
     }

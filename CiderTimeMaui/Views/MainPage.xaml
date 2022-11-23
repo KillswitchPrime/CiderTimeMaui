@@ -5,7 +5,8 @@
              xmlns:model="clr-namespace:CiderTimeMaui.Models"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:LabelsViewModel"
-             Title="CiderTime">
+             Title="CiderTime"
+             BackgroundColor="DimGrey">
 
     <Grid
         ColumnSpacing="5"
@@ -50,7 +51,7 @@
                                 VerticalOptions="Center"
                                 Padding="10">
                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />
+                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" />
                             <CollectionView BackgroundColor="Transparent"
                                             ItemsSource="{Binding Beverages}"
                                             SelectionMode="None">
@@ -70,9 +71,9 @@
 
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Beverage">
-                                        <Grid Padding="2">
-                                            <Label Text="{Binding Name}" Grid.ColumnSpan="0"/>
-                                            <Label Text="{Binding Rating, StringFormat='{0}/10'}" Grid.ColumnSpan="1"/>
+                                        <Grid Padding="4" ColumnSpacing="4" ColumnDefinitions="*,*">
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Name}" Grid.Column="0"/>
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Rating, StringFormat='{0}/10'}" Grid.Column="1"/>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -86,10 +87,11 @@
             
         </CollectionView>
 
-        <Button Text="Add Label" 
+        <Button Text="Legg til produsent" 
                 Command="{Binding GoToAddLabelPageCommand}"
                 Grid.Row="1"
-                Margin="8"/>
+                Margin="8"
+                BackgroundColor="DarkOrange"/>
     </Grid>
 
 </ContentPage>
