@@ -29,6 +29,10 @@ public static class MauiProgram
 		builder.Services.AddTransient<AddLabelPage>();
 
 		builder.Services.AddTransient<BeveragesPage>();
+		builder.Services.AddTransient<BeveragesViewModel>();
+
+		builder.Services.AddTransient<AddBeveragePage>();
+		builder.Services.AddTransient<AddBeverageViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
