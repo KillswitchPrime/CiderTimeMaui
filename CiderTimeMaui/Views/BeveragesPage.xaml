@@ -50,6 +50,8 @@
                                 <Image Source="drink.png"
                                     HorizontalOptions="CenterAndExpand"
                                     VerticalOptions="CenterAndExpand"
+                                    HeightRequest="75"
+                                    WidthRequest="75"
                                     Aspect="AspectFill"/>
 
                                 <VerticalStackLayout
