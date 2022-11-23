@@ -8,14 +8,10 @@ using Label = CiderTimeMaui.Models.Label;
 
 namespace CiderTimeMaui.ViewModels
 {
-    [QueryProperty("Label", nameof(Label))]
     public partial class LabelsViewModel : ObservableObject
     {
         public ObservableCollection<Label> Labels { get; } = new();
         private readonly IDataStorageService _dataStorageService;
-
-        [ObservableProperty]
-        Label newLabel;
 
         public LabelsViewModel(IDataStorageService dataStorageService)
         {
@@ -24,18 +20,15 @@ namespace CiderTimeMaui.ViewModels
 
         public async Task GetData()
         {
-            var data = await _dataStorageService.GetDataFromStorage();
-            var labels = new List<Label>();
-
-            try
-            {
-                labels = JsonSerializer.Deserialize<List<Label>>(data);
-            }
-            catch (JsonException)
-            {}
+            Labels.Clear();
+            
+            var labels = await _dataStorageService.GetDataFromStorage();
 
             foreach (var label in labels)
             {
+                if (label is null) 
+                    continue;
+
                 Labels.Add(label);
             }
         }
@@ -47,18 +40,13 @@ namespace CiderTimeMaui.ViewModels
         }
 
         [RelayCommand]
-        async Task GoToBeverages()
+        async Task GoToBeverages(Label label)
         {
-            await Shell.Current.GoToAsync(nameof(BeveragesPage), true);
-        }
-
-        public async Task AddNewLabel()
-        {
-            Labels.Add(newLabel);
-
-            var dataString = JsonSerializer.Serialize(Labels);
-
-            await _dataStorageService.WriteDataToStorage(dataString);
+            await Shell.Current.GoToAsync(nameof(BeveragesPage), true,
+                new Dictionary<string, object>
+                {
+                    {"Label", label }
+                });
         }
     }
 }

@@ -4,6 +4,7 @@
              x:Class="CiderTimeMaui.Views.AddLabelPage"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:AddLabelViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Add New Label">
     
     <Grid RowDefinitions="*,Auto"
@@ -12,11 +13,15 @@
         <VerticalStackLayout>
             <HorizontalStackLayout>
                 <Label Text="Name: "/>
-                <Entry Placeholder="Enter name" Text="{Binding Path=Label.Name, Mode=TwoWay}"/>
+                <Entry Placeholder="Enter name" Text="{Binding Path=Name, Mode=TwoWay}" ReturnCommand="{Binding AddLabelCommand}" ReturnType="Done">
+                    <Entry.Behaviors>
+                        <toolkit:TextValidationBehavior MinimumLength="1"/>
+                    </Entry.Behaviors>
+                </Entry>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <Label Text="Description: "/>
-                <Entry Placeholder="Enter description" Text="{Binding Path=Label.Description, Mode=TwoWay}"/>
+                <Entry Placeholder="Enter description" Text="{Binding Path=Description, Mode=TwoWay}" ReturnCommand="{Binding AddLabelCommand}" ReturnType="Done"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
 

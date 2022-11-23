@@ -1,8 +1,10 @@
-﻿namespace CiderTimeMaui.Services.Interfaces
+﻿using Label = CiderTimeMaui.Models.Label;
+
+namespace CiderTimeMaui.Services.Interfaces
 {
     public interface IDataStorageService
     {
-        Task<string> GetDataFromStorage();
-        Task WriteDataToStorage(string data);
+        Task<List<Label>> GetDataFromStorage();
+        Task WriteDataToStorage(List<Label> data);
     }
 }

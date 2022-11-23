@@ -2,7 +2,7 @@
 using CiderTimeMaui.Services.Interfaces;
 using CiderTimeMaui.ViewModels;
 using CiderTimeMaui.Views;
-using Microsoft.Extensions.DependencyInjection;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
 namespace CiderTimeMaui;
@@ -12,8 +12,9 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
+            builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

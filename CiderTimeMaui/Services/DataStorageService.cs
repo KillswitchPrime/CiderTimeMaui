@@ -1,5 +1,7 @@
 ﻿using CiderTimeMaui.Services.Interfaces;
 using System.Text;
+using System.Text.Json;
+using Label = CiderTimeMaui.Models.Label;
 
 namespace CiderTimeMaui.Services
 {
@@ -8,22 +10,25 @@ namespace CiderTimeMaui.Services
         private static readonly string _storageName = "CiderTimeStorageData.txt";
         private readonly string _storagePath = $"{FileSystem.AppDataDirectory}/{_storageName}";
 
-        public async Task<string> GetDataFromStorage()
+        public async Task<List<Label>> GetDataFromStorage()
         {
             try
             {
                 var bytes = await File.ReadAllBytesAsync(_storagePath);
-                return Encoding.UTF8.GetString(bytes);
+                var data = Encoding.UTF8.GetString(bytes);
+                return JsonSerializer.Deserialize<List<Label>>(data);
             }
-            catch (FileNotFoundException)
+            catch (Exception)
             {
                 File.Create(_storagePath);
-                return string.Empty;
+                return new List<Label>();
             }
         }
 
-        public async Task WriteDataToStorage(string data)
+        public async Task WriteDataToStorage(List<Label> labels)
         {
+            var data = JsonSerializer.Serialize(labels);
+
             var stream = File.OpenWrite(_storagePath);
             await stream.WriteAsync(Encoding.UTF8.GetBytes(data));
             stream.Close();

@@ -1,4 +1,5 @@
 ﻿using CiderTimeMaui.ViewModels;
+using System.Runtime.CompilerServices;
 
 namespace CiderTimeMaui;
 

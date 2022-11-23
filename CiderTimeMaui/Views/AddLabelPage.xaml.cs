@@ -7,6 +7,6 @@ public partial class AddLabelPage : ContentPage
 	public AddLabelPage(AddLabelViewModel viewModel)
 	{
 		InitializeComponent();
-
+		BindingContext = viewModel;
 	}
 }
