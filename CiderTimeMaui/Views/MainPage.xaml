@@ -72,7 +72,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Beverage">
                                         <Grid Padding="4" ColumnSpacing="4" ColumnDefinitions="*,*">
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Name}" Grid.Column="0"/>
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Name, StringFormat='• {0}'}" Grid.Column="0"/>
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Rating, StringFormat='{0}/10'}" Grid.Column="1"/>
                                         </Grid>
                                     </DataTemplate>
