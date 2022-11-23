@@ -26,6 +26,7 @@ namespace CiderTimeMaui.ViewModels
         {
             var label = new Label
             {
+                Id = Guid.NewGuid(),
                 Name = Name,
                 Description = Description,
                 Beverages = new List<Beverage>()

@@ -20,7 +20,8 @@ namespace CiderTimeMaui.Services
             }
             catch (Exception)
             {
-                File.Create(_storagePath);
+                using var fileStream = File.Create(_storagePath);
+                fileStream.Close();
                 return new List<Label>();
             }
         }

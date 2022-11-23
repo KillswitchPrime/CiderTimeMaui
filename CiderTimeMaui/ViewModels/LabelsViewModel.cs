@@ -3,7 +3,6 @@ using CiderTimeMaui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Text.Json;
 using Label = CiderTimeMaui.Models.Label;
 
 namespace CiderTimeMaui.ViewModels
@@ -21,12 +20,12 @@ namespace CiderTimeMaui.ViewModels
         public async Task GetData()
         {
             Labels.Clear();
-            
+
             var labels = await _dataStorageService.GetDataFromStorage();
 
             foreach (var label in labels)
             {
-                if (label is null) 
+                if (label is null)
                     continue;
 
                 Labels.Add(label);

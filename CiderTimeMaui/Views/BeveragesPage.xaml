@@ -2,11 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CiderTimeMaui.Views.BeveragesPage"
+             xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
+             x:DataType="viewmodel:BeveragesViewModel"
+             xmlns:models="clr-namespace:CiderTimeMaui.Models"
              Title="Beverages">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid
+        ColumnSpacing="5"
+        RowDefinitions="*,Auto"
+        RowSpacing="0">
+
+        <Image Source="wine_bottles.png"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Aspect="AspectFill"/>
+
+        <CollectionView
+            BackgroundColor="Transparent"
+            ItemsSource="{Binding Label.Beverages}"
+            SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                Span="{OnIdiom Desktop=4, Default=1}"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <StackLayout VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                WidthRequest="200"
+                                HeightRequest="200">
+
+                </StackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Beverage">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125" Style="{StaticResource CardView}">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BeveragesViewModel}}, Path=GoToEditBeverageCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <HorizontalStackLayout>
+
+                                <Image Source="drink.png"
+                                    HorizontalOptions="CenterAndExpand"
+                                    VerticalOptions="CenterAndExpand"
+                                    Aspect="AspectFill"/>
+
+                                <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    Padding="10">
+                                    <HorizontalStackLayout>
+                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
+                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='{0}/10'}"/>
+                                    </HorizontalStackLayout>
+                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Price: {0}'}" />
+                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />                              
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button Text="Add Beverage" 
+                Command="{Binding GoToAddBeverageCommand}"
+                Grid.Row="1"
+                Margin="8"/>
+    </Grid>
 </ContentPage>

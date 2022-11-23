@@ -12,16 +12,34 @@
         
         <VerticalStackLayout>
             <HorizontalStackLayout>
-                <Label Text="Name: "/>
-                <Entry Placeholder="Enter name" Text="{Binding Path=Name, Mode=TwoWay}" ReturnCommand="{Binding AddLabelCommand}" ReturnType="Done">
+                
+                <Label Style="{StaticResource LargeLabel}" Text="Name: "/>
+                
+                <Entry 
+                    Placeholder="Enter name" 
+                    Text="{Binding Path=Name, Mode=TwoWay}" 
+                    ReturnCommand="{Binding AddLabelCommand}" 
+                    ReturnType="Done" 
+                    FontSize="20">
+                    
                     <Entry.Behaviors>
                         <toolkit:TextValidationBehavior MinimumLength="1"/>
                     </Entry.Behaviors>
+                    
                 </Entry>
+                
             </HorizontalStackLayout>
             <HorizontalStackLayout>
-                <Label Text="Description: "/>
-                <Entry Placeholder="Enter description" Text="{Binding Path=Description, Mode=TwoWay}" ReturnCommand="{Binding AddLabelCommand}" ReturnType="Done"/>
+                
+                <Label Style="{StaticResource LargeLabel}" Text="Description: "/>
+                
+                <Entry 
+                    Placeholder="Enter description" 
+                    Text="{Binding Path=Description, Mode=TwoWay}" 
+                    ReturnCommand="{Binding AddLabelCommand}" 
+                    ReturnType="Done" 
+                    FontSize="20"/>
+                
             </HorizontalStackLayout>
         </VerticalStackLayout>
 

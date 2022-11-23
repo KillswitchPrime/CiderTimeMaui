@@ -15,7 +15,7 @@
 		<ApplicationTitle>CiderTimeMaui</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.cidertimemaui</ApplicationId>
+		<ApplicationId>com.cij.cidertimemaui</ApplicationId>
 		<ApplicationIdGuid>e65b5a59-f860-4740-aeb1-60e7163c4477</ApplicationIdGuid>
 
 		<!-- Versions -->
