@@ -18,7 +18,7 @@
 
         <CollectionView
             BackgroundColor="Transparent"
-            ItemsSource="{Binding Label.Beverages}"
+            ItemsSource="{Binding Beverages}"
             SelectionMode="None">
 
             <CollectionView.ItemsLayout>
@@ -59,7 +59,7 @@
                                     Padding="10">
                                     <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
                                     <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='Rating: {0}/10'}"/>
-                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Pris: {0}'}" />
+                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Pris: {0}kr'}" />
                                     <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />                              
                                 </VerticalStackLayout>
                             </HorizontalStackLayout>

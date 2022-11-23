@@ -51,7 +51,7 @@ namespace CiderTimeMaui.ViewModels
 
             await _storageService.WriteDataToStorage(labels);
 
-            await Shell.Current.GoToAsync($"/{nameof(BeveragesPage)}", true);
+            await Shell.Current.GoToAsync("..", true);
         }
     }
 }

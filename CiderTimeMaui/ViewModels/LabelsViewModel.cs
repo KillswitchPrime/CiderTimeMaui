@@ -39,12 +39,12 @@ namespace CiderTimeMaui.ViewModels
         }
 
         [RelayCommand]
-        async Task GoToBeverages(Label label)
+        async Task GoToBeverages(Guid id)
         {
             await Shell.Current.GoToAsync(nameof(BeveragesPage), true,
                 new Dictionary<string, object>
                 {
-                    {"Label", label }
+                    {"Id", id }
                 });
         }
     }

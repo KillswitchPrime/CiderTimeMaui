@@ -5,8 +5,7 @@
              xmlns:model="clr-namespace:CiderTimeMaui.Models"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:LabelsViewModel"
-             Title="CiderTime"
-             BackgroundColor="DimGrey">
+             Title="CiderTime">
 
     <Grid
         ColumnSpacing="5"
@@ -43,7 +42,7 @@
                     <Frame HeightRequest="125" Style="{StaticResource CardView}">
                             
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                            <TapGestureRecognizer CommandParameter="{Binding Id}"
                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LabelsViewModel}}, Path=GoToBeveragesCommand}"/>
                         </Frame.GestureRecognizers>
                             

@@ -9,4 +9,11 @@ public partial class BeveragesPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override async void OnAppearing()
+    {
+		var viewModel = BindingContext as BeveragesViewModel;
+		await viewModel.GetBeverages();
+        base.OnAppearing();
+    }
 }
