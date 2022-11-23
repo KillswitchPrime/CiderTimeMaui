@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>CiderTimeMaui</ApplicationTitle>
+		<ApplicationTitle>Cider Time</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.cij.cidertimemaui</ApplicationId>
