@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CiderTimeMaui.Views.AddBeveragePage"
+             x:Class="CiderTimeMaui.Views.EditLabelPage"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
-             x:DataType="viewmodel:AddBeverageViewModel"
+             x:DataType="viewmodel:EditLabelViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="Legg til drink">
+             Title="Rediger produsent">
 
     <Grid RowDefinitions="*,Auto"
           RowSpacing="0">
@@ -17,7 +17,7 @@
             <Entry 
                 Placeholder="Skriv navn" 
                 Text="{Binding Path=Name, Mode=TwoWay}" 
-                ReturnCommand="{Binding AddBeverageCommand}" 
+                ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
                 FontSize="20">
 
@@ -27,39 +27,19 @@
 
             </Entry>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Rating: "/>
-
-            <Entry 
-                Placeholder="Gi rating" 
-                Text="{Binding Path=Rating, Mode=TwoWay}" 
-                ReturnCommand="{Binding AddBeverageCommand}" 
-                ReturnType="Done" 
-                FontSize="20"
-                Keyboard="Numeric"/>
-
             <Label Style="{StaticResource LargeLabel}" Text="Beskrivelse: "/>
 
             <Entry 
                 Placeholder="Skriv beskrivelse" 
                 Text="{Binding Path=Description, Mode=TwoWay}" 
-                ReturnCommand="{Binding AddBeverageCommand}" 
+                ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
-                FontSize="20"/>
-
-            <Label Style="{StaticResource LargeLabel}" Text="Pris: "/>
-
-            <Entry 
-                Placeholder="Skriv pris" 
-                Text="{Binding Path=Price, Mode=TwoWay}" 
-                ReturnCommand="{Binding AddBeverageCommand}" 
-                ReturnType="Done" 
-                FontSize="20"
-                Keyboard="Numeric"/>
+                    FontSize="20"/>
         </VerticalStackLayout>
 
-        <Button Command="{Binding AddBeverageCommand}"
+        <Button Command="{Binding FinishedEditingCommand}"
                 Grid.Row="1"
-                Text="Legg til drink"
+                Text="Ferdig"
                 Margin="8"
                 BackgroundColor="DarkOrange"/>
     </Grid>

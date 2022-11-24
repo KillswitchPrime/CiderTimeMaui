@@ -5,16 +5,22 @@
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:BeveragesViewModel"
              xmlns:models="clr-namespace:CiderTimeMaui.Models"
-             Title="Drinker">
+             Title="{Binding LabelName, StringFormat='Drinker fra {0}'}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Rediger"
+                     Command="{Binding GoToEditLabelCommand}"/>
+    </ContentPage.ToolbarItems>
+    
     <Grid
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
 
         <Image Source="wine_bottles.png"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"
-            Aspect="AspectFill"/>
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               Aspect="AspectFill"/>
 
         <CollectionView
             BackgroundColor="Transparent"
@@ -23,14 +29,14 @@
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
-                                Span="{OnIdiom Desktop=4, Default=1}"/>
+                                 Span="{OnIdiom Desktop=4, Default=1}"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.EmptyView>
                 <StackLayout VerticalOptions="Center"
-                                HorizontalOptions="Center"
-                                WidthRequest="200"
-                                HeightRequest="200">
+                             HorizontalOptions="Center"
+                             WidthRequest="200"
+                             HeightRequest="200">
 
                 </StackLayout>
             </CollectionView.EmptyView>
@@ -41,18 +47,18 @@
                         <Frame HeightRequest="125" Style="{StaticResource CardView}">
 
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding .}"
-                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BeveragesViewModel}}, Path=GoToEditBeverageCommand}"/>
+                                <TapGestureRecognizer CommandParameter="{Binding Id}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BeveragesViewModel}}, Path=GoToEditBeverageCommand}"/>
                             </Frame.GestureRecognizers>
 
                             <HorizontalStackLayout>
 
                                 <Image Source="drink.png"
-                                    HorizontalOptions="CenterAndExpand"
-                                    VerticalOptions="CenterAndExpand"
-                                    HeightRequest="75"
-                                    WidthRequest="75"
-                                    Aspect="AspectFill"/>
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                       HeightRequest="75"
+                                       WidthRequest="75"
+                                       Aspect="AspectFill"/>
 
                                 <VerticalStackLayout
                                     VerticalOptions="Center"

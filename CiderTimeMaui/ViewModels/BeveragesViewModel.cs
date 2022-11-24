@@ -15,6 +15,9 @@ namespace CiderTimeMaui.ViewModels
         [ObservableProperty]
         Guid labelId;
 
+        [ObservableProperty]
+        string labelName;
+
         private readonly IDataStorageService _storageService;
 
         public BeveragesViewModel(IDataStorageService storageService)
@@ -32,6 +35,26 @@ namespace CiderTimeMaui.ViewModels
                 });
         }
 
+        [RelayCommand]
+        async Task GoToEditBeverage(Guid beverageId)
+        {
+            await Shell.Current.GoToAsync(nameof(EditBeveragePage), true,
+                new Dictionary<string, object>
+                {
+                    {"BeverageId", beverageId}
+                });
+        }
+
+        [RelayCommand]
+        async Task GoToEditLabel()
+        {
+            await Shell.Current.GoToAsync(nameof(EditLabelPage), true,
+                new Dictionary<string, object>
+                {
+                    {"LabelId", labelId}
+                });
+        }
+
         public async Task GetBeverages()
         {
             Beverages.Clear();
@@ -39,6 +62,7 @@ namespace CiderTimeMaui.ViewModels
             var labels = await _storageService.GetDataFromStorage();
 
             var currentLabel = labels.FirstOrDefault(l => l.Id == LabelId);
+            LabelName = currentLabel.Name;
 
             foreach(var beverage in currentLabel.Beverages.OrderBy(x => x.Name))
             {
