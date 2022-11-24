@@ -59,7 +59,7 @@
 
         <Button Command="{Binding FinishedEditingCommand}"
                 Grid.Row="1"
-                Text="Legg til drink"
+                Text="Ferdig"
                 Margin="8"
                 BackgroundColor="DarkOrange"/>
     </Grid>
