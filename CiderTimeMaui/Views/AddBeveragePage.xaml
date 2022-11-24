@@ -62,6 +62,23 @@
                 ReturnType="Done" 
                 FontSize="20"
                 Keyboard="Numeric"/>
+
+            <HorizontalStackLayout>
+
+                <Button
+                    Text="Bruk kamera" 
+                    Command="{Binding TakePhotoCommand}"
+                    Margin="8"
+                    BackgroundColor="DarkCyan"/>
+                
+                <Button
+                    Text="Legg til bilde..." 
+                    Command="{Binding GetImageCommand}"
+                    Margin="8"
+                    BackgroundColor="DarkCyan"/>
+                
+            </HorizontalStackLayout>
+            
         </VerticalStackLayout>
 
         <Button Command="{Binding AddBeverageCommand}"

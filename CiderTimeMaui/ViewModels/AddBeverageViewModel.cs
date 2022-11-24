@@ -20,13 +20,17 @@ namespace CiderTimeMaui.ViewModels
         [ObservableProperty]
         string rating;
         [ObservableProperty]
-        object image = null;
+        Guid imageId = Guid.NewGuid();
 
         private readonly IDataStorageService _storageService;
+        private readonly IMediaService _mediaService;
+        private readonly string _imageUrl = $"{FileSystem.AppDataDirectory}/Media";
 
-        public AddBeverageViewModel(IDataStorageService storageService)
+        public AddBeverageViewModel(IDataStorageService storageService,
+            IMediaService mediaService)
         {
             _storageService = storageService;
+            _mediaService = mediaService;
         }
 
         [RelayCommand]
@@ -39,7 +43,7 @@ namespace CiderTimeMaui.ViewModels
                 Description = Description,
                 Price = decimal.Parse(Price),
                 Rating = int.Parse(Rating),
-                Image = nameof(Image)
+                ImageUrl = $"{_imageUrl}/{ImageId}"
             };
 
             var labels = await _storageService.GetDataFromStorage();
@@ -52,6 +56,18 @@ namespace CiderTimeMaui.ViewModels
             await _storageService.WriteDataToStorage(labels);
 
             await Shell.Current.GoToAsync("..", true);
+        }
+
+        [RelayCommand]
+        async Task GetImage()
+        {
+            await _mediaService.GetImage($"{_imageUrl}/{ImageId}");
+        }
+
+        [RelayCommand]
+        async Task TakePhoto()
+        {
+            await _mediaService.TakePhoto($"{_imageUrl}/{ImageId}");
         }
     }
 }

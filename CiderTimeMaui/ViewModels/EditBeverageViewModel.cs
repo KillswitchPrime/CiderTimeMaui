@@ -18,12 +18,16 @@ namespace CiderTimeMaui.ViewModels
         string rating;
         [ObservableProperty]
         string price;
+        [ObservableProperty]
+        string imageUrl;
 
         private readonly IDataStorageService _storageService;
+        private readonly IMediaService _mediaService;
 
-        public EditBeverageViewModel(IDataStorageService storageService)
+        public EditBeverageViewModel(IDataStorageService storageService, IMediaService mediaService)
         {
             _storageService = storageService;
+            _mediaService = mediaService;
         }
 
         [RelayCommand]
@@ -49,6 +53,18 @@ namespace CiderTimeMaui.ViewModels
                 });
         }
 
+        [RelayCommand]
+        async Task GetImage()
+        {
+            await _mediaService.GetImage(ImageUrl);
+        }
+
+        [RelayCommand]
+        async Task TakePhoto()
+        {
+            await _mediaService.TakePhoto(ImageUrl);
+        }
+
         public async Task GetData()
         {
             var labels = await _storageService.GetDataFromStorage();
@@ -61,6 +77,8 @@ namespace CiderTimeMaui.ViewModels
             Description = beverage.Description;
             Rating = beverage.Rating.ToString();
             Price = beverage.Price.ToString();
+            ImageUrl = beverage.ImageUrl;
         }
+
     }
 }

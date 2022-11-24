@@ -53,7 +53,7 @@
 
                             <HorizontalStackLayout>
 
-                                <Image Source="drink.png"
+                                <Image Source="{Binding ImageUrl, TargetNullValue='drink.png'}"
                                        HorizontalOptions="CenterAndExpand"
                                        VerticalOptions="CenterAndExpand"
                                        HeightRequest="75"

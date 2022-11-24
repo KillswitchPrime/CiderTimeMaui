@@ -55,6 +55,29 @@
                 ReturnType="Done" 
                 FontSize="20"
                 Keyboard="Numeric"/>
+
+            <Image Source="{Binding ImageUrl, TargetNullValue='drink.png'}"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   HeightRequest="75"
+                   WidthRequest="75"
+                   Aspect="AspectFill"/>
+
+            <HorizontalStackLayout>
+
+                <Button
+                    Text="Bruk kamera" 
+                    Command="{Binding TakePhotoCommand}"
+                    Margin="8"
+                    BackgroundColor="DarkCyan"/>
+
+                <Button
+                    Text="Legg til bilde..." 
+                    Command="{Binding GetImageCommand}"
+                    Margin="8"
+                    BackgroundColor="DarkCyan"/>
+
+            </HorizontalStackLayout>
         </VerticalStackLayout>
 
         <Button Command="{Binding FinishedEditingCommand}"
