@@ -1,4 +1,5 @@
-﻿using CiderTimeMaui.Services.Interfaces;
+﻿using Android.OS;
+using CiderTimeMaui.Services.Interfaces;
 
 namespace CiderTimeMaui.Services
 {
@@ -8,6 +9,8 @@ namespace CiderTimeMaui.Services
 
         public async Task GetImage(string imageUrl)
         {
+            await CheckPermissions();
+
             var image = await MediaPicker.Default.PickPhotoAsync();
             using var imageStream = await image.OpenReadAsync();
 
@@ -23,6 +26,8 @@ namespace CiderTimeMaui.Services
 
         public async Task TakePhoto(string imageUrl)
         {
+            await CheckPermissions();
+
             var photo = await MediaPicker.Default.CapturePhotoAsync();
 
             using var photoStream = await photo.OpenReadAsync();
@@ -36,6 +41,16 @@ namespace CiderTimeMaui.Services
 
             await photoStream.DisposeAsync();
             await fileStream.DisposeAsync();
+        }
+
+        private async Task CheckPermissions()
+        {
+            var hasPermission = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+
+            if (hasPermission is not PermissionStatus.Granted)
+            {
+                var permssion = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            }
         }
     }
 }
