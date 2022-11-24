@@ -1,11 +1,6 @@
 ﻿using CiderTimeMaui.Services.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CiderTimeMaui.ViewModels
 {
@@ -34,28 +29,30 @@ namespace CiderTimeMaui.ViewModels
         {
             var labels = await _storageService.GetDataFromStorage();
 
-            foreach (var label in labels.Where(x => x.Beverages.FirstOrDefault(b => b.Id == Id) is not null))
+            foreach (var beverage in labels.SelectMany(l => l.Beverages).Where(b => b.Id == Id))
             {
-                foreach(var beverage in label.Beverages)
-                {
-                    beverage.Name = Name;
-                    beverage.Description = Description;
-                    beverage.Rating = int.Parse(Rating);
-                    beverage.Price = decimal.Parse(Price);
-                }
+                beverage.Name = Name;
+                beverage.Description = Description;
+                beverage.Rating = int.Parse(Rating);
+                beverage.Price = decimal.Parse(Price);
             }
 
             await _storageService.WriteDataToStorage(labels);
 
-            await Shell.Current.GoToAsync("..", true);
+            var labelId = labels.FirstOrDefault(l => l.Beverages.Any(b => b.Id == Id)).Id;
+            await Shell.Current.GoToAsync("..", true,
+                new Dictionary<string, object>
+                {
+                    {"LabelId", labelId}
+                });
         }
 
         public async Task GetData()
         {
             var labels = await _storageService.GetDataFromStorage();
 
-            var beverage = labels.FirstOrDefault(x => x.Beverages.FirstOrDefault(b => b.Id == Id) is not null)
-                .Beverages
+            var beverage = labels
+                .SelectMany(l => l.Beverages)
                 .FirstOrDefault(b => b.Id == Id);
 
             Name = beverage.Name;
