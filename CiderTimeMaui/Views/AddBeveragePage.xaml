@@ -35,7 +35,14 @@
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
                 FontSize="20"
-                Keyboard="Numeric"/>
+                Keyboard="Numeric">
+
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior MinimumLength="1"
+                                                    MaximumLength="1"/>
+                </Entry.Behaviors>
+
+            </Entry>
 
             <Label Style="{StaticResource LargeLabel}" Text="Beskrivelse: "/>
 
