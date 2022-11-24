@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:CiderTimeMaui.Models"
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:LabelsViewModel"
-             Title="CiderTime">
+             Title="Cider Time">
 
     <Grid
         ColumnSpacing="5"

@@ -21,7 +21,7 @@ namespace CiderTimeMaui.Services
             catch (Exception)
             {
                 using var fileStream = File.Create(_storagePath);
-                fileStream.Close();
+                await fileStream.DisposeAsync();
                 return new List<Label>();
             }
         }
@@ -32,7 +32,7 @@ namespace CiderTimeMaui.Services
 
             var stream = File.OpenWrite(_storagePath);
             await stream.WriteAsync(Encoding.UTF8.GetBytes(data));
-            stream.Close();
+            await stream.DisposeAsync();
         }
     }
 }
