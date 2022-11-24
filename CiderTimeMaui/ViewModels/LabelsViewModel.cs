@@ -23,7 +23,7 @@ namespace CiderTimeMaui.ViewModels
 
             var labels = await _dataStorageService.GetDataFromStorage();
 
-            foreach (var label in labels)
+            foreach (var label in labels.OrderBy(x => x.Name))
             {
                 if (label is null)
                     continue;
@@ -39,12 +39,12 @@ namespace CiderTimeMaui.ViewModels
         }
 
         [RelayCommand]
-        async Task GoToBeverages(Guid id)
+        async Task GoToBeverages(Guid labelId)
         {
             await Shell.Current.GoToAsync(nameof(BeveragesPage), true,
                 new Dictionary<string, object>
                 {
-                    {"Id", id }
+                    {"LabelId", labelId }
                 });
         }
     }

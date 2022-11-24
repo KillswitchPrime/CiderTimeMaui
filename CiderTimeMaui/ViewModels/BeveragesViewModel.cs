@@ -7,13 +7,13 @@ using System.Collections.ObjectModel;
 
 namespace CiderTimeMaui.ViewModels
 {
-    [QueryProperty(nameof(Id), "Id")]
+    [QueryProperty(nameof(LabelId), "LabelId")]
     public partial class BeveragesViewModel : ObservableObject
     {
         public ObservableCollection<Beverage> Beverages { get; } = new();
 
         [ObservableProperty]
-        Guid id;
+        Guid labelId;
 
         private readonly IDataStorageService _storageService;
 
@@ -28,7 +28,7 @@ namespace CiderTimeMaui.ViewModels
             await Shell.Current.GoToAsync(nameof(AddBeveragePage), true, 
                 new Dictionary<string, object>
                 {
-                    {"Id", Id}
+                    {"LabelId", labelId}
                 });
         }
 
@@ -38,9 +38,9 @@ namespace CiderTimeMaui.ViewModels
 
             var labels = await _storageService.GetDataFromStorage();
 
-            var currentLabel = labels.FirstOrDefault(l => l.Id == Id);
+            var currentLabel = labels.FirstOrDefault(l => l.Id == LabelId);
 
-            foreach(var beverage in currentLabel.Beverages)
+            foreach(var beverage in currentLabel.Beverages.OrderBy(x => x.Name))
             {
                 Beverages.Add(beverage);
             }

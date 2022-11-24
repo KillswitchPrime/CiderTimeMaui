@@ -24,14 +24,14 @@
             
         <CollectionView.ItemsLayout>
             <GridItemsLayout Orientation="Vertical"
-                                Span="{OnIdiom Desktop=4, Default=1}"/>
+                             Span="{OnIdiom Desktop=4, Default=1}"/>
         </CollectionView.ItemsLayout>
             
         <CollectionView.EmptyView>
             <StackLayout VerticalOptions="Center"
-                                HorizontalOptions="Center"
-                                WidthRequest="200"
-                                HeightRequest="200">
+                         HorizontalOptions="Center"
+                         WidthRequest="200"
+                         HeightRequest="200">
 
             </StackLayout>
         </CollectionView.EmptyView>
@@ -57,9 +57,9 @@
                                     
                                 <CollectionView.EmptyView>
                                     <StackLayout VerticalOptions="Center"
-                                                    HorizontalOptions="Center"
-                                                    WidthRequest="200"
-                                                    HeightRequest="200">
+                                                  HorizontalOptions="Center"
+                                                  WidthRequest="200"
+                                                  HeightRequest="200">
                                         <Image Source="drink.png"
                                             HorizontalOptions="CenterAndExpand"
                                             VerticalOptions="CenterAndExpand"

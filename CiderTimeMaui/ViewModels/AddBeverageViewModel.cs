@@ -1,16 +1,15 @@
 ﻿using CiderTimeMaui.Models;
 using CiderTimeMaui.Services.Interfaces;
-using CiderTimeMaui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace CiderTimeMaui.ViewModels
 {
-    [QueryProperty(nameof(Id), "Id")]
+    [QueryProperty(nameof(LabelId), "LabelId")]
     public partial class AddBeverageViewModel : ObservableObject
     {
         [ObservableProperty]
-        Guid id;
+        Guid labelId;
 
         [ObservableProperty]
         string name;
@@ -35,6 +34,7 @@ namespace CiderTimeMaui.ViewModels
         {
             var beverage = new Beverage
             {
+                Id = Guid.NewGuid(),
                 Name = Name,
                 Description = Description,
                 Price = decimal.Parse(Price),
@@ -44,7 +44,7 @@ namespace CiderTimeMaui.ViewModels
 
             var labels = await _storageService.GetDataFromStorage();
 
-            foreach(var label in labels.Where(x => x.Id == Id))
+            foreach(var label in labels.Where(x => x.Id == LabelId))
             {
                 label.Beverages.Add(beverage);
             }
