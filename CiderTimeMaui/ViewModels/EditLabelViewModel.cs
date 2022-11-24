@@ -7,18 +7,20 @@ namespace CiderTimeMaui.ViewModels
     [QueryProperty(nameof(Id), "LabelId")]
     public partial class EditLabelViewModel : ObservableObject
     {
+        [ObservableProperty]
+        Guid id;
+
+        [ObservableProperty]
+        string name;
+        [ObservableProperty]
+        string description;
+
         private readonly IDataStorageService _storageService;
 
         public EditLabelViewModel(IDataStorageService storageService)
         {
             _storageService = storageService;
         }
-        [ObservableProperty]
-        Guid id;
-        [ObservableProperty]
-        string name;
-        [ObservableProperty]
-        string description;
 
         [RelayCommand]
         async Task FinishedEditing()

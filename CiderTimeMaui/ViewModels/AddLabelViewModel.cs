@@ -9,6 +9,11 @@ namespace CiderTimeMaui.ViewModels
 {
     public partial class AddLabelViewModel : ObservableObject
     {
+        [ObservableProperty]
+        string name;
+        [ObservableProperty]
+        string description;
+
         private readonly IDataStorageService _storageService;
 
         public AddLabelViewModel(IDataStorageService storageService)
@@ -16,10 +21,6 @@ namespace CiderTimeMaui.ViewModels
             _storageService = storageService;
         }
 
-        [ObservableProperty]
-        string name;
-        [ObservableProperty]
-        string description;
 
         [RelayCommand]
         async Task AddLabel()

@@ -7,14 +7,9 @@ namespace CiderTimeMaui.ViewModels
     [QueryProperty(nameof(Id), "BeverageId")]
     public partial class EditBeverageViewModel : ObservableObject
     {
-        private readonly IDataStorageService _storageService;
-
-        public EditBeverageViewModel(IDataStorageService storageService)
-        {
-            _storageService = storageService;
-        }
         [ObservableProperty]
         Guid id;
+
         [ObservableProperty]
         string name;
         [ObservableProperty]
@@ -23,6 +18,13 @@ namespace CiderTimeMaui.ViewModels
         string rating;
         [ObservableProperty]
         string price;
+
+        private readonly IDataStorageService _storageService;
+
+        public EditBeverageViewModel(IDataStorageService storageService)
+        {
+            _storageService = storageService;
+        }
 
         [RelayCommand]
         async Task FinishedEditing()
