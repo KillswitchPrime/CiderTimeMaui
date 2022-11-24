@@ -39,7 +39,7 @@
 
                 <Entry.Behaviors>
                     <toolkit:TextValidationBehavior MinimumLength="1"
-                                                    MaximumLength="1"/>
+                                                    MaximumLength="2"/>
                 </Entry.Behaviors>
 
             </Entry>
