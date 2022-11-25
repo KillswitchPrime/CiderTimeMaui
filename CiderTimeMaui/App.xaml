@@ -71,6 +71,7 @@
                 <Setter Property="IsClippedToBounds" Value="True"/>
                 <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}" />
             </Style>
+            <x:String x:Key="DefaultImage">drink.png</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

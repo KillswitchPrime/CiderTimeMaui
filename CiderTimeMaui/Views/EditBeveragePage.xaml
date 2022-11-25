@@ -56,7 +56,7 @@
                 FontSize="20"
                 Keyboard="Numeric"/>
 
-            <Image Source="{Binding ImageUrl, TargetNullValue='drink.png', FallbackValue='drink.png'}"
+            <Image Source="{Binding ImageUrl, TargetNullValue={StaticResource DefaultImage}, FallbackValue={StaticResource DefaultImage}}"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"
                    HeightRequest="75"
