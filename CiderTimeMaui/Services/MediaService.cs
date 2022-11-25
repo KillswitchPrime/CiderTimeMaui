@@ -11,6 +11,10 @@ namespace CiderTimeMaui.Services
             await CheckPermissions();
 
             var image = await MediaPicker.Default.PickPhotoAsync();
+
+            if (image is null)
+                return;
+
             using var imageStream = await image.OpenReadAsync();
 
             if(Directory.Exists(_directory) is false) 
@@ -28,6 +32,9 @@ namespace CiderTimeMaui.Services
             await CheckPermissions();
 
             var photo = await MediaPicker.Default.CapturePhotoAsync();
+
+            if(photo is null)
+                return;
 
             using var photoStream = await photo.OpenReadAsync();
 
@@ -47,9 +54,7 @@ namespace CiderTimeMaui.Services
             var hasPermission = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
             if (hasPermission is not PermissionStatus.Granted)
-            {
-                var permssion = await Permissions.RequestAsync<Permissions.StorageWrite>();
-            }
+                await Permissions.RequestAsync<Permissions.StorageWrite>();
         }
     }
 }
