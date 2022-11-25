@@ -30,8 +30,8 @@ namespace CiderTimeMaui.Services
         {
             var data = JsonSerializer.Serialize(labels);
 
-            var stream = File.OpenWrite(_storagePath);
-            await stream.WriteAsync(Encoding.UTF8.GetBytes(data));
+            var stream = File.CreateText(_storagePath);
+            await stream.WriteLineAsync(data);
             await stream.DisposeAsync();
         }
     }
