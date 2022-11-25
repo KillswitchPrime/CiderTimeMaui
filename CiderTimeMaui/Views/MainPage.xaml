@@ -39,7 +39,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="model:Label">
                 <Grid Padding="10">
-                    <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                    <Frame Style="{StaticResource CardView}">
                             
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer CommandParameter="{Binding Id}"
@@ -51,26 +51,18 @@
                                 Padding="10">
                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" />
-                            <CollectionView BackgroundColor="Transparent"
+                                <CollectionView BackgroundColor="Transparent"
                                             ItemsSource="{Binding Beverages}"
                                             SelectionMode="None">
-                                    
-                                <CollectionView.EmptyView>
-                                    <StackLayout VerticalOptions="Center"
-                                                  HorizontalOptions="Center"
-                                                  WidthRequest="200"
-                                                  HeightRequest="200">
-                                        <Image Source="drink.png"
-                                            HorizontalOptions="CenterAndExpand"
-                                            VerticalOptions="CenterAndExpand"
-                                            Aspect="AspectFill"/>
 
-                                    </StackLayout>
-                                </CollectionView.EmptyView>
-
-                                <CollectionView.ItemTemplate>
+                                    <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Beverage">
                                         <Grid Padding="4" ColumnSpacing="4" ColumnDefinitions="*,*">
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                            CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type model:Label}}, Path=Id}"
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LabelsViewModel}}, Path=GoToBeveragesCommand}"/>
+                                                </Grid.GestureRecognizers>
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Name, StringFormat='• {0}'}" Grid.Column="0"/>
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Rating, StringFormat='{0}/10'}" Grid.Column="1"/>
                                         </Grid>

@@ -35,7 +35,7 @@ namespace CiderTimeMaui.ViewModels
 
             await _storageService.WriteDataToStorage(labels);
 
-            await Shell.Current.GoToAsync($"///{nameof(MainPage)}", true);
+            await Shell.Current.GoToAsync($"..", true);
         }
 
         public async Task GetData()

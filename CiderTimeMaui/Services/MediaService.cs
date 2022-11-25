@@ -1,5 +1,4 @@
-﻿using Android.OS;
-using CiderTimeMaui.Services.Interfaces;
+﻿using CiderTimeMaui.Services.Interfaces;
 
 namespace CiderTimeMaui.Services
 {
