@@ -64,6 +64,9 @@ namespace CiderTimeMaui.ViewModels
             var currentLabel = labels.FirstOrDefault(l => l.Id == LabelId);
             LabelName = currentLabel.Name;
 
+            if (currentLabel.Beverages.Any() is false)
+                return;
+
             foreach(var beverage in currentLabel.Beverages.OrderBy(x => x.Name))
             {
                 Beverages.Add(beverage);

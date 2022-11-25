@@ -76,14 +76,17 @@ namespace CiderTimeMaui.ViewModels
                 return;
 
             var labels = await _storageService.GetDataFromStorage();
+            var labelId = labels.FirstOrDefault(l => l.Beverages.Any(b => b.Id == Id)).Id;
 
-            labels.SelectMany(l => l.Beverages)
-                .ToList()
-                .RemoveAll(x => x.Id == Id);
+            labels.ForEach(l => l.Beverages.RemoveAll(b => b.Id == Id));
 
             await _storageService.WriteDataToStorage(labels);
 
-            await Shell.Current.GoToAsync("..", true);
+            await Shell.Current.GoToAsync("..", true,
+                new Dictionary<string, object>
+                {
+                    { "LabelId", labelId}
+                });
         }
 
         public async Task GetData()
