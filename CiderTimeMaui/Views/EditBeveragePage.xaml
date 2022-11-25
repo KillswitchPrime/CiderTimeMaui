@@ -78,6 +78,14 @@
                     BackgroundColor="DarkCyan"/>
 
             </HorizontalStackLayout>
+
+            <Button Command="{Binding DeleteBeverageCommand}"
+                    Margin="8,16,8,8"
+                    Text="Slett drink"
+                    FontSize="20"
+                    TextColor="White"
+                    BackgroundColor="Red"
+                    />
         </VerticalStackLayout>
 
         <Button Command="{Binding FinishedEditingCommand}"

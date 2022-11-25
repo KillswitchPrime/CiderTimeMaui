@@ -65,6 +65,27 @@ namespace CiderTimeMaui.ViewModels
             await _mediaService.TakePhoto(ImageUrl);
         }
 
+        [RelayCommand]
+        async Task DeleteBeverage()
+        {
+            var answer = await Shell.Current.DisplayAlert("Advarsel!",
+                "Er du sikker på at du vil slette drinken? Dette er en permanent handling.",
+                "Ok", "Avbryt");
+
+            if (answer is false)
+                return;
+
+            var labels = await _storageService.GetDataFromStorage();
+
+            labels.SelectMany(l => l.Beverages)
+                .ToList()
+                .RemoveAll(x => x.Id == Id);
+
+            await _storageService.WriteDataToStorage(labels);
+
+            await Shell.Current.GoToAsync("..", true);
+        }
+
         public async Task GetData()
         {
             var labels = await _storageService.GetDataFromStorage();

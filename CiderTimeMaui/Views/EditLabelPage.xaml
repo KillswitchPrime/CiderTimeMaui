@@ -35,6 +35,15 @@
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
                     FontSize="20"/>
+
+            <Button Command="{Binding DeleteLabelCommand}"
+                    Margin="8,128,8,8"
+                    Text="Slett produsent"
+                    FontSize="20"
+                    TextColor="White"
+                    BackgroundColor="Red"
+                    />
+
         </VerticalStackLayout>
 
         <Button Command="{Binding FinishedEditingCommand}"
