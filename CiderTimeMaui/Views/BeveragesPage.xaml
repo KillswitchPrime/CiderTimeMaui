@@ -5,10 +5,10 @@
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:BeveragesViewModel"
              xmlns:models="clr-namespace:CiderTimeMaui.Models"
-             Title="{Binding LabelName, StringFormat='Drinker fra {0}'}">
+             Title="{Binding LabelName, StringFormat='Beverages from {0}'}">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Rediger"
+        <ToolbarItem Text="Edit"
                      Command="{Binding GoToEditLabelCommand}"/>
     </ContentPage.ToolbarItems>
     
@@ -27,17 +27,17 @@
             RowSpacing="0">
 
             <Picker x:Name="sortPicker"
-                Title="Sorter"
+                Title="Sort"
                 Grid.Row="0"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>A-Z</x:String>
                         <x:String>Z-A</x:String>
-                        <x:String>Rating god</x:String>
-                        <x:String>Rating dårlig</x:String>
-                        <x:String>Pris høy</x:String>
-                        <x:String>Pris lav</x:String>
+                        <x:String>Rating high</x:String>
+                        <x:String>Rating low</x:String>
+                        <x:String>Price high</x:String>
+                        <x:String>Price low</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
@@ -77,7 +77,7 @@
                                         Padding="10">
                                         <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
                                         <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='Rating: {0}/10'}"/>
-                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Pris: {0}kr'}" />
+                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Price: {0}kr'}" />
                                         <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />
                                     </VerticalStackLayout>
                                 </HorizontalStackLayout>
@@ -88,7 +88,7 @@
 
             </CollectionView>
 
-            <Button Text="Legg til drink" 
+            <Button Text="Add Beverage" 
                     Command="{Binding GoToAddBeverageCommand}"
                     Grid.Row="2"
                     Margin="8"

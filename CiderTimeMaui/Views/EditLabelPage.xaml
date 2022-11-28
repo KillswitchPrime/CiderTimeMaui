@@ -5,17 +5,17 @@
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:EditLabelViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="Rediger produsent">
+             Title="Edit Label">
 
     <Grid RowDefinitions="*,Auto"
           RowSpacing="0">
 
         <VerticalStackLayout>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Navn: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Name: "/>
 
             <Entry 
-                Placeholder="Skriv navn" 
+                Placeholder="Write Name..." 
                 Text="{Binding Path=Name, Mode=TwoWay}" 
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
@@ -27,18 +27,18 @@
 
             </Entry>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Beskrivelse: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Description: (Optional)"/>
 
             <Entry 
-                Placeholder="Skriv beskrivelse" 
+                Placeholder="Write Description..." 
                 Text="{Binding Path=Description, Mode=TwoWay}" 
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
-                    FontSize="20"/>
+                FontSize="20"/>
 
             <Button Command="{Binding DeleteLabelCommand}"
                     Margin="8,128,8,8"
-                    Text="Slett produsent"
+                    Text="Delete Label"
                     FontSize="20"
                     TextColor="White"
                     BackgroundColor="Red"
@@ -48,7 +48,7 @@
 
         <Button Command="{Binding FinishedEditingCommand}"
                 Grid.Row="1"
-                Text="Ferdig"
+                Text="Done"
                 Margin="8"
                 BackgroundColor="DarkOrange"/>
     </Grid>

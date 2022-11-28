@@ -5,17 +5,17 @@
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:AddBeverageViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="Legg til drink">
+             Title="Add Beverage">
 
     <Grid RowDefinitions="*,Auto"
           RowSpacing="0">
 
         <VerticalStackLayout>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Navn: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Name: "/>
 
             <Entry 
-                Placeholder="Skriv navn" 
+                Placeholder="Write Name..." 
                 Text="{Binding Path=Name, Mode=TwoWay}" 
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
@@ -30,7 +30,7 @@
             <Label Style="{StaticResource LargeLabel}" Text="Rating: "/>
 
             <Entry 
-                Placeholder="Gi rating" 
+                Placeholder="Rate..." 
                 Text="{Binding Path=Rating, Mode=TwoWay}" 
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
@@ -44,19 +44,19 @@
 
             </Entry>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Beskrivelse: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Description: (Optional)"/>
 
             <Entry 
-                Placeholder="Skriv beskrivelse" 
+                Placeholder="Write Description..." 
                 Text="{Binding Path=Description, Mode=TwoWay}" 
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
                 FontSize="20"/>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Pris: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Price: (Optional)"/>
 
             <Entry 
-                Placeholder="Skriv pris" 
+                Placeholder="Write Price..." 
                 Text="{Binding Path=Price, Mode=TwoWay}" 
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
@@ -66,13 +66,13 @@
             <HorizontalStackLayout>
 
                 <Button
-                    Text="Bruk kamera" 
+                    Text="Add Camera Photo" 
                     Command="{Binding TakePhotoCommand}"
                     Margin="8"
                     BackgroundColor="DarkCyan"/>
                 
                 <Button
-                    Text="Legg til bilde..." 
+                    Text="Add Image from Disk..." 
                     Command="{Binding GetImageCommand}"
                     Margin="8"
                     BackgroundColor="DarkCyan"/>
@@ -83,7 +83,7 @@
 
         <Button Command="{Binding AddBeverageCommand}"
                 Grid.Row="1"
-                Text="Legg til drink"
+                Text="Add Beverage"
                 Margin="8"
                 BackgroundColor="DarkOrange"/>
     </Grid>

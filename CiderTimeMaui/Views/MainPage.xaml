@@ -22,19 +22,19 @@
               RowSpacing="0">
             
             <Picker x:Name="sortPicker"
-                Title="Sorter"
+                Title="Sort"
                 Grid.Row="0"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>A-Z</x:String>
                         <x:String>Z-A</x:String>
-                        <x:String>Flest drinker</x:String>
-                        <x:String>Færrest drinker</x:String>
-                        <x:String>Høyest rating</x:String>
-                        <x:String>Lavest rating</x:String>
-                        <x:String>Dyrest drink</x:String>
-                        <x:String>Billigst drink</x:String>
+                        <x:String>Drinks desc.</x:String>
+                        <x:String>Drinks asc.</x:String>
+                        <x:String>Rating high</x:String>
+                        <x:String>Rating low</x:String>
+                        <x:String>Price high</x:String>
+                        <x:String>Price low</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
@@ -92,7 +92,7 @@
 
             </CollectionView>
 
-            <Button Text="Legg til produsent" 
+            <Button Text="Add Label" 
                 Command="{Binding GoToAddLabelPageCommand}"
                 Grid.Row="2"
                 Margin="8"

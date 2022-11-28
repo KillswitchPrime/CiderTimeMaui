@@ -5,17 +5,17 @@
              xmlns:viewmodel="clr-namespace:CiderTimeMaui.ViewModels"
              x:DataType="viewmodel:EditBeverageViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="Rediger drink">
+             Title="Edit Beverage">
 
     <Grid RowDefinitions="*,Auto"
           RowSpacing="0">
 
         <VerticalStackLayout>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Navn: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Name: "/>
 
             <Entry 
-                Placeholder="Skriv navn" 
+                Placeholder="Write Name..." 
                 Text="{Binding Path=Name, Mode=TwoWay}" 
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
@@ -30,26 +30,33 @@
             <Label Style="{StaticResource LargeLabel}" Text="Rating: "/>
 
             <Entry 
-                Placeholder="Gi rating" 
+                Placeholder="Rate..." 
                 Text="{Binding Path=Rating, Mode=TwoWay}" 
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
                 FontSize="20"
-                Keyboard="Numeric"/>
+                Keyboard="Numeric">
 
-            <Label Style="{StaticResource LargeLabel}" Text="Beskrivelse: "/>
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior MinimumLength="1"
+                                                    MaximumLength="2"/>
+                </Entry.Behaviors>
+
+            </Entry>
+
+            <Label Style="{StaticResource LargeLabel}" Text="Description: (Optional)"/>
 
             <Entry 
-                Placeholder="Skriv beskrivelse" 
+                Placeholder="Write Description..." 
                 Text="{Binding Path=Description, Mode=TwoWay}" 
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
                 FontSize="20"/>
 
-            <Label Style="{StaticResource LargeLabel}" Text="Pris: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Price: (Optional)"/>
 
             <Entry 
-                Placeholder="Skriv pris" 
+                Placeholder="Write Price..." 
                 Text="{Binding Path=Price, Mode=TwoWay}" 
                 ReturnCommand="{Binding FinishedEditingCommand}" 
                 ReturnType="Done" 
@@ -66,13 +73,13 @@
             <HorizontalStackLayout>
 
                 <Button
-                    Text="Bruk kamera" 
+                    Text="Add Camera Photo" 
                     Command="{Binding TakePhotoCommand}"
                     Margin="8"
                     BackgroundColor="DarkCyan"/>
 
                 <Button
-                    Text="Legg til bilde..." 
+                    Text="Add Image from Disk..." 
                     Command="{Binding GetImageCommand}"
                     Margin="8"
                     BackgroundColor="DarkCyan"/>
@@ -81,7 +88,7 @@
 
             <Button Command="{Binding DeleteBeverageCommand}"
                     Margin="8,16,8,8"
-                    Text="Slett drink"
+                    Text="Delete Beverage"
                     FontSize="20"
                     TextColor="White"
                     BackgroundColor="Red"
@@ -91,7 +98,7 @@
 
         <Button Command="{Binding FinishedEditingCommand}"
                 Grid.Row="1"
-                Text="Ferdig"
+                Text="Done"
                 Margin="8"
                 BackgroundColor="DarkOrange"/>
     </Grid>
