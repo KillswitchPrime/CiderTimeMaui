@@ -55,7 +55,7 @@ namespace CiderTimeMaui.Services
             await fileStream.DisposeAsync();
         }
 
-        private async Task<bool> CheckPermissions()
+        private static async Task<bool> CheckPermissions()
         {
             var hasPermission = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
