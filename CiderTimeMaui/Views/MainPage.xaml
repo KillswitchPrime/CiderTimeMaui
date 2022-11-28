@@ -20,24 +20,40 @@
         <Grid ColumnSpacing="5"
               RowDefinitions="Auto,*,Auto"
               RowSpacing="0">
-            
-            <Picker x:Name="sortPicker"
-                Title="Sort"
-                Grid.Row="0"
-                SelectedIndexChanged="OnPickerSelectedIndexChanged">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>A-Z</x:String>
-                        <x:String>Z-A</x:String>
-                        <x:String>Drinks desc.</x:String>
-                        <x:String>Drinks asc.</x:String>
-                        <x:String>Rating high</x:String>
-                        <x:String>Rating low</x:String>
-                        <x:String>Price high</x:String>
-                        <x:String>Price low</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+
+            <HorizontalStackLayout Grid.Row="0" Spacing="1">
+
+                <Button Command="{Binding ResetSearchCommand}"
+                        Text="Reset"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        TextColor="White"
+                        BorderWidth="1"/>
+
+                <SearchBar SearchCommand="{Binding SearchCommand}"
+                           x:Name="searchBar"
+                           WidthRequest="240"
+                           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                           Placeholder="Search..."/>
+
+                <Picker x:Name="sortPicker"
+                    Title="Sort"
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>A-Z</x:String>
+                            <x:String>Z-A</x:String>
+                            <x:String>Drinks desc.</x:String>
+                            <x:String>Drinks asc.</x:String>
+                            <x:String>Rating high</x:String>
+                            <x:String>Rating low</x:String>
+                            <x:String>Price high</x:String>
+                            <x:String>Price low</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                
+            </HorizontalStackLayout>
 
             <CollectionView
             BackgroundColor="Transparent"

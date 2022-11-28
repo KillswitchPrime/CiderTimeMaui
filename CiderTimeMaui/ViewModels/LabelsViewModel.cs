@@ -54,6 +54,35 @@ namespace CiderTimeMaui.ViewModels
         }
 
         [RelayCommand]
+        async Task Search(string searchQuery)
+        {
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                await GetData();
+                return;
+            }
+
+            var labels = await _dataStorageService.GetDataFromStorage();
+
+            var searchedLabels = labels
+                .Where(l => l.Name.Contains(searchQuery) || 
+                       l.Description.Contains(searchQuery) ||
+                       l.Beverages.Any(b => b.Name.Contains(searchQuery) || b.Description.Contains(searchQuery)))
+                .ToList();
+
+            Labels.Clear();
+
+            foreach(var label in searchedLabels)
+                Labels.Add(label);
+        }
+
+        [RelayCommand]
+        async Task ResetSearch()
+        {
+            await GetData();
+        }
+
+        [RelayCommand]
         async Task GoToAddLabelPage()
         {
             await Shell.Current.GoToAsync(nameof(AddLabelPage), true);

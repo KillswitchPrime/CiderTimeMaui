@@ -55,6 +55,35 @@ namespace CiderTimeMaui.ViewModels
                 });
         }
 
+        [RelayCommand]
+        async Task Search(string searchQuery)
+        {
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                await GetBeverages();
+                return;
+            }
+
+            var labels = await _storageService.GetDataFromStorage();
+
+            var beverages = labels.FirstOrDefault(l => l.Id == LabelId).Beverages;
+
+            var searchedBeverages = beverages
+                .Where(b => b.Name.Contains(searchQuery) || b.Description.Contains(searchQuery))
+                .ToList();
+
+            Beverages.Clear();
+
+            foreach (var beverage in searchedBeverages)
+                Beverages.Add(beverage);
+        }
+
+        [RelayCommand]
+        async Task ResetSearch()
+        {
+            await GetBeverages();
+        }
+
         public async Task GetBeverages()
         {
             Beverages.Clear();
