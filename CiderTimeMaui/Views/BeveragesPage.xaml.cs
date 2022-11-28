@@ -16,4 +16,17 @@ public partial class BeveragesPage : ContentPage
 		await viewModel.GetBeverages();
         base.OnAppearing();
     }
+
+    void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = sender as Picker;
+        int selectedIndex = picker.SelectedIndex;
+
+        var viewModel = BindingContext as BeveragesViewModel;
+
+        if (selectedIndex is not -1)
+        {
+            viewModel.SortBeveragesList(selectedIndex);
+        }
+    }
 }

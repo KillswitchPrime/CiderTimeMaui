@@ -72,5 +72,24 @@ namespace CiderTimeMaui.ViewModels
                 Beverages.Add(beverage);
             }
         }
+
+        public void SortBeveragesList(int sortType)
+        {
+            var sortedBeverages = sortType switch
+            {
+                0 => Beverages.OrderBy(b => b.Name).ToList(),
+                1 => Beverages.OrderByDescending(b => b.Name).ToList(),
+                2 => Beverages.OrderByDescending(b => b.Rating).ToList(),
+                3 => Beverages.OrderBy(b => b.Rating).ToList(),
+                4 => Beverages.OrderByDescending(b => b.Price).ToList(),
+                5 => Beverages.OrderBy(b => b.Price).ToList(),
+                _ => Beverages.OrderBy(b => b.Name).ToList()
+            };
+
+            Beverages.Clear();
+
+            foreach (var beverage in sortedBeverages.ToList())
+                Beverages.Add(beverage);
+        }
     }
 }

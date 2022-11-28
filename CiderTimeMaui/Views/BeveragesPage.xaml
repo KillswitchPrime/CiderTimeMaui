@@ -21,65 +21,78 @@
                HorizontalOptions="CenterAndExpand"
                VerticalOptions="CenterAndExpand"
                Aspect="AspectFill"/>
+        <Grid
+            ColumnSpacing="5"
+            RowDefinitions="Auto,*,Auto"
+            RowSpacing="0">
 
-        <CollectionView
-            BackgroundColor="Transparent"
-            ItemsSource="{Binding Beverages}"
-            SelectionMode="None">
+            <Picker x:Name="sortPicker"
+                Title="Sorter"
+                Grid.Row="0"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>A-Z</x:String>
+                        <x:String>Z-A</x:String>
+                        <x:String>Rating god</x:String>
+                        <x:String>Rating dårlig</x:String>
+                        <x:String>Pris høy</x:String>
+                        <x:String>Pris lav</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
 
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"
-                                 Span="{OnIdiom Desktop=4, Default=1}"/>
-            </CollectionView.ItemsLayout>
+            <CollectionView
+                BackgroundColor="Transparent"
+                ItemsSource="{Binding Beverages}"
+                SelectionMode="None"
+                Grid.Row="1">
 
-            <CollectionView.EmptyView>
-                <StackLayout VerticalOptions="Center"
-                             HorizontalOptions="Center"
-                             WidthRequest="200"
-                             HeightRequest="200">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="{OnIdiom Desktop=4, Default=1}"/>
+                </CollectionView.ItemsLayout>
 
-                </StackLayout>
-            </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Beverage">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Beverage">
-                    <Grid Padding="10">
-                        <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding Id}"
+                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BeveragesViewModel}}, Path=GoToEditBeverageCommand}"/>
+                                </Frame.GestureRecognizers>
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding Id}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BeveragesViewModel}}, Path=GoToEditBeverageCommand}"/>
-                            </Frame.GestureRecognizers>
+                                <HorizontalStackLayout>
 
-                            <HorizontalStackLayout>
+                                    <Image Source="{Binding ImageUrl, TargetNullValue={StaticResource DefaultImage}, FallbackValue={StaticResource DefaultImage}}" 
+                                           HorizontalOptions="CenterAndExpand"
+                                           VerticalOptions="CenterAndExpand"
+                                           HeightRequest="75"
+                                           WidthRequest="75"
+                                           Aspect="AspectFill"/>
 
-                                <Image Source="{Binding ImageUrl, TargetNullValue={StaticResource DefaultImage}, FallbackValue={StaticResource DefaultImage}}" 
-                                       HorizontalOptions="CenterAndExpand"
-                                       VerticalOptions="CenterAndExpand"
-                                       HeightRequest="75"
-                                       WidthRequest="75"
-                                       Aspect="AspectFill"/>
+                                    <VerticalStackLayout
+                                        VerticalOptions="Center"
+                                        Padding="10">
+                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
+                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='Rating: {0}/10'}"/>
+                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Pris: {0}kr'}" />
+                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                                <VerticalStackLayout
-                                    VerticalOptions="Center"
-                                    Padding="10">
-                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Rating, StringFormat='Rating: {0}/10'}"/>
-                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Price, StringFormat='Pris: {0}kr'}" />
-                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Description}" />                              
-                                </VerticalStackLayout>
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        </CollectionView>
-
-        <Button Text="Legg til drink" 
-                Command="{Binding GoToAddBeverageCommand}"
-                Grid.Row="1"
-                Margin="8"
-                BackgroundColor="DarkOrange"/>
+            <Button Text="Legg til drink" 
+                    Command="{Binding GoToAddBeverageCommand}"
+                    Grid.Row="2"
+                    Margin="8"
+                    BackgroundColor="DarkOrange"/>
+        </Grid>
     </Grid>
 </ContentPage>

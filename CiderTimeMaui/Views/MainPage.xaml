@@ -11,78 +11,90 @@
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
-        
+
         <Image Source="wine_bottles.png"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             Aspect="AspectFill"/>
-        
-        <CollectionView
+
+        <Grid ColumnSpacing="5"
+              RowDefinitions="Auto,*,Auto"
+              RowSpacing="0">
+            
+            <Picker x:Name="sortPicker"
+                Title="Sorter"
+                Grid.Row="0"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>A-Z</x:String>
+                        <x:String>Z-A</x:String>
+                        <x:String>Flest drinker</x:String>
+                        <x:String>Færrest drinker</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <CollectionView
             BackgroundColor="Transparent"
             ItemsSource="{Binding Labels}"
-            SelectionMode="None">
-            
-        <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical"
-                             Span="{OnIdiom Desktop=4, Default=1}"/>
-        </CollectionView.ItemsLayout>
-            
-        <CollectionView.EmptyView>
-            <StackLayout VerticalOptions="Center"
-                         HorizontalOptions="Center"
-                         WidthRequest="200"
-                         HeightRequest="200">
+            SelectionMode="None"
+            Grid.Row="1">
 
-            </StackLayout>
-        </CollectionView.EmptyView>
-            
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:Label">
-                <Grid Padding="10">
-                    <Frame Style="{StaticResource CardView}">
-                            
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer CommandParameter="{Binding Id}"
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                             Span="{OnIdiom Desktop=4, Default=1}"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Label">
+                        <Grid Padding="10">
+                            <Frame Style="{StaticResource CardView}">
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding Id}"
                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LabelsViewModel}}, Path=GoToBeveragesCommand}"/>
-                        </Frame.GestureRecognizers>
-                            
-                        <VerticalStackLayout
+                                </Frame.GestureRecognizers>
+
+                                <VerticalStackLayout
                                 VerticalOptions="Center"
                                 Padding="10">
-                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" />
-                                <CollectionView BackgroundColor="Transparent"
+                                    <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Description}" />
+                                    <CollectionView BackgroundColor="Transparent"
                                             ItemsSource="{Binding Beverages}"
                                             SelectionMode="None">
 
-                                    <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="model:Beverage">
-                                        <Grid Padding="4" ColumnSpacing="4" ColumnDefinitions="*,*">
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="model:Beverage">
+                                                <Grid Padding="4" ColumnSpacing="4" ColumnDefinitions="*,*">
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer
                                                             CommandParameter="{Binding Source={RelativeSource AncestorType={x:Type model:Label}}, Path=Id}"
                                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LabelsViewModel}}, Path=GoToBeveragesCommand}"/>
-                                                </Grid.GestureRecognizers>
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Name, StringFormat='• {0}'}" Grid.Column="0"/>
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Rating, StringFormat='{0}/10'}" Grid.Column="1"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                                    
-                            </CollectionView>
-                        </VerticalStackLayout>
-                    </Frame>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-            
-        </CollectionView>
+                                                    </Grid.GestureRecognizers>
+                                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Name, StringFormat='• {0}'}" Grid.Column="0"/>
+                                                    <Label Style="{StaticResource MediumLabel}" Text="{Binding Rating, StringFormat='{0}/10'}" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
 
-        <Button Text="Legg til produsent" 
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+            <Button Text="Legg til produsent" 
                 Command="{Binding GoToAddLabelPageCommand}"
-                Grid.Row="1"
+                Grid.Row="2"
                 Margin="8"
                 BackgroundColor="DarkOrange"/>
+        </Grid>
+
     </Grid>
 
 </ContentPage>

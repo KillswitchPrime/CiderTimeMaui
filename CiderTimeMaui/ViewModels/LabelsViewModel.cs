@@ -32,6 +32,23 @@ namespace CiderTimeMaui.ViewModels
             }
         }
 
+        public void SortLabelList(int sortType)
+        {
+            var sortedLabels = sortType switch
+            {
+                0 => Labels.OrderBy(l => l.Name).ToList(),
+                1 => Labels.OrderByDescending(l => l.Name).ToList(),
+                2 => Labels.OrderByDescending(l => l.Beverages.Count).ToList(),
+                3 => Labels.OrderBy(l => l.Beverages.Count).ToList(),
+                _ => Labels.OrderBy(l => l.Name).ToList()
+            };
+
+            Labels.Clear();
+
+            foreach (var label in sortedLabels.ToList())
+                Labels.Add(label);
+        }
+
         [RelayCommand]
         async Task GoToAddLabelPage()
         {
