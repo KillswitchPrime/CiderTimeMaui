@@ -31,6 +31,10 @@
                         <x:String>Z-A</x:String>
                         <x:String>Flest drinker</x:String>
                         <x:String>Færrest drinker</x:String>
+                        <x:String>Høyest rating</x:String>
+                        <x:String>Lavest rating</x:String>
+                        <x:String>Dyrest drink</x:String>
+                        <x:String>Billigst drink</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>

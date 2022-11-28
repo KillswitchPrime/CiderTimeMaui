@@ -40,6 +40,10 @@ namespace CiderTimeMaui.ViewModels
                 1 => Labels.OrderByDescending(l => l.Name).ToList(),
                 2 => Labels.OrderByDescending(l => l.Beverages.Count).ToList(),
                 3 => Labels.OrderBy(l => l.Beverages.Count).ToList(),
+                4 => Labels.OrderByDescending(l => l.Beverages.MaxBy(b => b.Rating).Rating).ToList(),
+                5 => Labels.OrderBy(l => l.Beverages.MinBy(b => b.Rating).Rating).ToList(),
+                6 => Labels.OrderByDescending(l => l.Beverages.MaxBy(b => b.Price).Price).ToList(),
+                7 => Labels.OrderBy(l => l.Beverages.MinBy(b => b.Price).Price).ToList(),
                 _ => Labels.OrderBy(l => l.Name).ToList()
             };
 
