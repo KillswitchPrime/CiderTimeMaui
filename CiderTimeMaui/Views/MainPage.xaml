@@ -108,11 +108,24 @@
 
             </CollectionView>
 
-            <Button Text="Add Label" 
-                Command="{Binding GoToAddLabelPageCommand}"
-                Grid.Row="2"
-                Margin="8"
-                BackgroundColor="DarkOrange"/>
+            <Grid Grid.Row="2"
+                  ColumnSpacing="8"
+                  Grid.ColumnDefinitions="*,*"
+                  Margin="8">
+
+                <Button Text="Recommend Drink"
+                        Grid.Column="0"
+                        Command="{Binding RecommendDrinkCommand}"
+                        BackgroundColor="DarkOrange"
+                        HorizontalOptions="FillAndExpand"/>
+
+                <Button Text="Add Label" 
+                        Grid.Column="1"
+                        Command="{Binding GoToAddLabelPageCommand}"
+                        BackgroundColor="DarkOrange"
+                        HorizontalOptions="FillAndExpand"/>
+
+            </Grid>
         </Grid>
 
     </Grid>

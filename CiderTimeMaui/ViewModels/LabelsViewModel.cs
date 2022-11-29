@@ -77,8 +77,7 @@ namespace CiderTimeMaui.ViewModels
                     searchedLabels.Add(label);
                 else if (label.Beverages.Any() is false)
                     continue;
-                else if(label.Beverages
-                    .Any(b => 
+                else if(label.Beverages.Any(b => 
                         b.Name.ToUpper().Contains(formattedSearchQuery) || 
                         (!string.IsNullOrWhiteSpace(b.Description) && b.Description.ToUpper().Contains(formattedSearchQuery))))
                     searchedLabels.Add(label);
@@ -110,6 +109,37 @@ namespace CiderTimeMaui.ViewModels
                 {
                     {"LabelId", labelId }
                 });
+        }
+
+        [RelayCommand]
+        async Task RecommendDrink()
+        {
+            var title = "Sorry!";
+            var message = "No drinks to recommend!";
+
+            if (Labels.Any() is false) {
+                await Shell.Current.DisplayAlert(title, message, "OK");
+                return;
+            }
+
+            var random = new Random();
+
+            var recommendedDrinks = Labels
+                .Where(l => l.Beverages.Any())
+                .SelectMany(l => l.Beverages)
+                .Where(b => b.Rating > 5)
+                .ToList();
+
+            if(recommendedDrinks.Any() is false)
+            {
+                await Shell.Current.DisplayAlert(title, message, "OK");
+                return;
+            }
+
+            var recommendedDrink = recommendedDrinks[random.Next(0, recommendedDrinks.Count)];
+            var recommendedLabel = Labels.FirstOrDefault(l => l.Beverages.Any(b => b.Id == recommendedDrink.Id));
+
+            await Shell.Current.DisplayAlert("I recommend this drink", $"{recommendedDrink.Name} from {recommendedLabel.Name} with a {recommendedDrink.Rating}/10 rating.", "Thanks");
         }
     }
 }
