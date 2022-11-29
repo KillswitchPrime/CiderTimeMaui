@@ -106,6 +106,9 @@ namespace CiderTimeMaui.ViewModels
 
         public void SortBeveragesList(int sortType)
         {
+            if (Beverages.Any() is false)
+                return;
+
             var sortedBeverages = sortType switch
             {
                 0 => Beverages.OrderBy(b => b.Name).ToList(),
