@@ -2,3 +2,4 @@
 CiderTimeMaui/obj
 CiderTimeMaui/bin
 .idea
+*.keystore
