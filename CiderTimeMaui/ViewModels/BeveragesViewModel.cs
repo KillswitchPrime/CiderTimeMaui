@@ -58,18 +58,22 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task Search(string searchQuery)
         {
-            if (string.IsNullOrEmpty(searchQuery))
+            if (string.IsNullOrEmpty(searchQuery) || Beverages.Any() is false)
             {
                 await GetBeverages();
                 return;
             }
+
+            var formattedSearchQuery = searchQuery.ToUpper().Trim();
 
             var labels = await _storageService.GetDataFromStorage();
 
             var beverages = labels.FirstOrDefault(l => l.Id == LabelId).Beverages;
 
             var searchedBeverages = beverages
-                .Where(b => b.Name.Contains(searchQuery) || b.Description.Contains(searchQuery))
+                .Where(b => 
+                    b.Name.ToUpper().Contains(formattedSearchQuery) || 
+                    (!string.IsNullOrWhiteSpace(b.Description) && b.Description.ToUpper().Contains(formattedSearchQuery)))
                 .ToList();
 
             Beverages.Clear();
@@ -97,9 +101,7 @@ namespace CiderTimeMaui.ViewModels
                 return;
 
             foreach(var beverage in currentLabel.Beverages.OrderBy(x => x.Name))
-            {
                 Beverages.Add(beverage);
-            }
         }
 
         public void SortBeveragesList(int sortType)

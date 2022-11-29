@@ -56,19 +56,30 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task Search(string searchQuery)
         {
-            if (string.IsNullOrEmpty(searchQuery))
+            if (string.IsNullOrEmpty(searchQuery) || Labels.Any() is false)
             {
                 await GetData();
                 return;
             }
 
+            var formattedSearchQuery = searchQuery.ToUpper().Trim();
+
             var labels = await _dataStorageService.GetDataFromStorage();
 
-            var searchedLabels = labels
-                .Where(l => l.Name.Contains(searchQuery) || 
-                       l.Description.Contains(searchQuery) ||
-                       l.Beverages.Any(b => b.Name.Contains(searchQuery) || b.Description.Contains(searchQuery)))
-                .ToList();
+            var searchedLabels = new List<Label>();
+            foreach(var label in labels)
+            {
+                if (label.Name.ToUpper().Contains(formattedSearchQuery) || 
+                   (!string.IsNullOrWhiteSpace(label.Description) && label.Description.ToUpper().Contains(formattedSearchQuery)))
+                    searchedLabels.Add(label);
+                else if (label.Beverages.Any() is false)
+                    continue;
+                else if(label.Beverages
+                    .Any(b => 
+                        b.Name.ToUpper().Contains(formattedSearchQuery) || 
+                        (!string.IsNullOrWhiteSpace(b.Description) && b.Description.ToUpper().Contains(formattedSearchQuery))))
+                    searchedLabels.Add(label);
+            }
 
             Labels.Clear();
 

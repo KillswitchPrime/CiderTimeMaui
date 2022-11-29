@@ -43,15 +43,13 @@ namespace CiderTimeMaui.ViewModels
                 Description = Description,
                 Price = decimal.Parse(Price),
                 Rating = int.Parse(Rating),
-                ImageUrl = $"{_imageUrl}/{ImageId}"
+                ImageUrl = $"{_imageUrl}/{ImageId}.jpg"
             };
 
             var labels = await _storageService.GetDataFromStorage();
 
             foreach(var label in labels.Where(x => x.Id == LabelId))
-            {
                 label.Beverages.Add(beverage);
-            }
 
             await _storageService.WriteDataToStorage(labels);
 
