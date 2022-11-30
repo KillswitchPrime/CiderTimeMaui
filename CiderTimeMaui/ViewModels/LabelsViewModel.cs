@@ -139,7 +139,9 @@ namespace CiderTimeMaui.ViewModels
             var recommendedDrink = recommendedDrinks[random.Next(0, recommendedDrinks.Count)];
             var recommendedLabel = Labels.FirstOrDefault(l => l.Beverages.Any(b => b.Id == recommendedDrink.Id));
 
-            await Shell.Current.DisplayAlert("I recommend this drink", $"{recommendedDrink.Name} from {recommendedLabel.Name} with a {recommendedDrink.Rating}/10 rating.", "Thanks");
+            await Shell.Current.DisplayAlert("I recommend this drink", 
+                $"{recommendedDrink.Name} from {recommendedLabel.Name} with a {recommendedDrink.Rating}/10 rating.", 
+                "Thanks");
         }
     }
 }
