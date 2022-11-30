@@ -33,14 +33,24 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task FinishedEditing()
         {
+            var ratingIsValid = int.TryParse(Rating, out var parsedRating);
+            if (string.IsNullOrWhiteSpace(Name) ||
+                ratingIsValid is false ||
+                parsedRating < 0 ||
+                parsedRating > 10)
+            {
+                await Shell.Current.DisplayAlert("Oops!", "Please add a valid Name and Rating.", "OK");
+                return;
+            }
+
             var labels = await _storageService.GetDataFromStorage();
 
             foreach (var beverage in labels.SelectMany(l => l.Beverages).Where(b => b.Id == Id))
             {
                 beverage.Name = Name;
                 beverage.Description = Description;
-                beverage.Rating = int.Parse(Rating);
-                beverage.Price = decimal.Parse(Price);
+                beverage.Rating = parsedRating;
+                beverage.Price = decimal.TryParse(Price, out var parsedPrice) ? parsedPrice : 0M;
             }
 
             await _storageService.WriteDataToStorage(labels);

@@ -17,17 +17,11 @@
             <Entry 
                 Placeholder="Write Name..." 
                 Text="{Binding Path=Name, Mode=TwoWay}" 
-                ReturnCommand="{Binding AddBeverageCommand}" 
+                ReturnCommand="{Binding AddBeverageCommand}"
                 ReturnType="Done" 
-                FontSize="20">
+                FontSize="20"/>
 
-                <Entry.Behaviors>
-                    <toolkit:TextValidationBehavior MinimumLength="1"/>
-                </Entry.Behaviors>
-
-            </Entry>
-
-            <Label Style="{StaticResource LargeLabel}" Text="Rating: "/>
+            <Label Style="{StaticResource LargeLabel}" Text="Rating: (0-10)"/>
 
             <Entry 
                 Placeholder="Rate..." 
@@ -35,14 +29,7 @@
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
                 FontSize="20"
-                Keyboard="Numeric">
-
-                <Entry.Behaviors>
-                    <toolkit:TextValidationBehavior MinimumLength="1"
-                                                    MaximumLength="2"/>
-                </Entry.Behaviors>
-
-            </Entry>
+                Keyboard="Numeric"/>
 
             <Label Style="{StaticResource LargeLabel}" Text="Description: (Optional)"/>
 
@@ -61,13 +48,7 @@
                 ReturnCommand="{Binding AddBeverageCommand}" 
                 ReturnType="Done" 
                 FontSize="20"
-                Keyboard="Numeric">
-
-                <Entry.Behaviors>
-                    <toolkit:NumericValidationBehavior MinimumValue="1"/>
-                </Entry.Behaviors>
-
-            </Entry>
+                Keyboard="Numeric"/>
 
             <HorizontalStackLayout>
 

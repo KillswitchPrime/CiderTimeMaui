@@ -36,13 +36,23 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task AddBeverage()
         {
+            var ratingIsValid = int.TryParse(Rating, out var parsedRating);
+            if (string.IsNullOrWhiteSpace(Name) || 
+                ratingIsValid is false || 
+                parsedRating < 0 || 
+                parsedRating > 10)
+            {
+                await Shell.Current.DisplayAlert("Oops!", "Please add a valid Name and Rating.", "OK");
+                return;
+            }
+
             var beverage = new Beverage
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
                 Description = Description,
-                Price = decimal.Parse(Price),
-                Rating = int.Parse(Rating),
+                Price = decimal.TryParse(Price, out var parsedPrice) ? parsedPrice : 0M,
+                Rating = parsedRating,
                 ImageUrl = $"{_imageUrl}/{ImageId}.jpg"
             };
 

@@ -19,13 +19,7 @@
                 Text="{Binding Path=Name, Mode=TwoWay}" 
                 ReturnCommand="{Binding AddLabelCommand}" 
                 ReturnType="Done" 
-                FontSize="20">
-
-                <Entry.Behaviors>
-                    <toolkit:TextValidationBehavior MinimumLength="1"/>
-                </Entry.Behaviors>
-
-            </Entry>
+                FontSize="20"/>
 
             <Label Style="{StaticResource LargeLabel}" Text="Description: (Optional)"/>
 

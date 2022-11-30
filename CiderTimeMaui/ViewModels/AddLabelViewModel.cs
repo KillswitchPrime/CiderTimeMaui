@@ -25,6 +25,12 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task AddLabel()
         {
+            if(string.IsNullOrWhiteSpace(Name))
+            {
+                await Shell.Current.DisplayAlert("Oops!", "Please add a valid Name.", "OK");
+                return;
+            }
+
             var label = new Label
             {
                 Id = Guid.NewGuid(),

@@ -25,6 +25,12 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task FinishedEditing()
         {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                await Shell.Current.DisplayAlert("Oops!", "Please add a valid Name.", "OK");
+                return;
+            }
+
             var labels = await _storageService.GetDataFromStorage();
 
             foreach(var label in labels.Where(x => x.Id == Id))
