@@ -25,8 +25,6 @@ public partial class BeveragesPage : ContentPage
         var viewModel = BindingContext as BeveragesViewModel;
 
         if (selectedIndex is not -1)
-        {
             viewModel.SortBeveragesList(selectedIndex);
-        }
     }
 }

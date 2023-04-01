@@ -58,7 +58,7 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task Search(string searchQuery)
         {
-            if (string.IsNullOrEmpty(searchQuery) || Beverages.Any() is false)
+            if (string.IsNullOrEmpty(searchQuery) || Beverages.Count < 1)
             {
                 await GetBeverages();
                 return;

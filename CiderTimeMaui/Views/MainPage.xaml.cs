@@ -27,9 +27,7 @@ public partial class MainPage : ContentPage
         var viewModel = BindingContext as LabelsViewModel;
 
         if (selectedIndex is not -1 ) 
-		{
 			viewModel.SortLabelList(selectedIndex);
-		}
 	}
 }
 

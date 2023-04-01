@@ -25,13 +25,10 @@ namespace CiderTimeMaui.Services {
                 var data = Encoding.UTF8.GetString(bytes);
                 return JsonSerializer.Deserialize<List<Label>>(data);
             }
-            catch (Exception e) {
+            catch (Exception) {
 
-                if (e is FileNotFoundException) {
-                    using var fileStream = File.Create(_storagePath);
-                    await fileStream.DisposeAsync();
-                }
-
+                using var fileStream = File.Create(_storagePath);
+                await fileStream.DisposeAsync();
                 return new List<Label>();
             }
         }
