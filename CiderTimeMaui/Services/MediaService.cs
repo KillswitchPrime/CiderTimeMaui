@@ -6,10 +6,16 @@ namespace CiderTimeMaui.Services
     {
         private readonly string _directory = $"{FileSystem.AppDataDirectory}/Media";
 
+        private readonly IPermissionsService _permissionsService;
+
+        public MediaService(IPermissionsService permissionsService) 
+        {
+            _permissionsService = permissionsService;
+        }
+
         public async Task GetImage(string imageUrl)
         {
-            var hasPermission = await CheckPermissions();
-
+            var hasPermission = await _permissionsService.CheckMediaPermissions();
             if (hasPermission is false)
                 return;
 
@@ -32,9 +38,8 @@ namespace CiderTimeMaui.Services
 
         public async Task TakePhoto(string imageUrl)
         {
-            var hasPermission = await CheckPermissions();
-
-            if(hasPermission is false) 
+            var hasPermission = await _permissionsService.CheckCameraPermissions();
+            if (hasPermission is false)
                 return;
 
             var photo = await MediaPicker.Default.CapturePhotoAsync();
@@ -53,16 +58,6 @@ namespace CiderTimeMaui.Services
 
             await photoStream.DisposeAsync();
             await fileStream.DisposeAsync();
-        }
-
-        private static async Task<bool> CheckPermissions()
-        {
-            var hasPermission = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
-
-            if (hasPermission is PermissionStatus.Granted)
-                return true;
-
-            return await Permissions.RequestAsync<Permissions.StorageWrite>() == PermissionStatus.Granted;
         }
     }
 }
