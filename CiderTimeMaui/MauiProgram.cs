@@ -24,6 +24,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<IDataStorageService, DataStorageService>();
 		builder.Services.AddSingleton<IMediaService, MediaService>();
+		builder.Services.AddScoped<IPermissionsService, PermissionsService>();
 		builder.Services.AddSingleton<LabelsViewModel>();
 
 		builder.Services.AddTransient<AddLabelViewModel>();
