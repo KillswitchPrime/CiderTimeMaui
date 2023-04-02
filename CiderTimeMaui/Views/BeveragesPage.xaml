@@ -70,8 +70,8 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Beverage">
-                        <Grid Padding="10">
-                            <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                        <Grid Padding="5">
+                            <Frame HeightRequest="125" Style="{StaticResource CardView}" Padding="5">
 
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding Id}"

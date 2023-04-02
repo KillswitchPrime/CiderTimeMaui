@@ -68,8 +68,8 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Label">
-                        <Grid Padding="10">
-                            <Frame Style="{StaticResource CardView}">
+                        <Grid Padding="5">
+                            <Frame Style="{StaticResource CardView}" Padding="5">
 
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding Id}"
