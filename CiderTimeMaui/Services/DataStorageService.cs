@@ -3,7 +3,8 @@ using System.Text;
 using System.Text.Json;
 using Label = CiderTimeMaui.Models.Label;
 
-namespace CiderTimeMaui.Services {
+namespace CiderTimeMaui.Services 
+{
     public class DataStorageService : IDataStorageService {
         private static readonly string _storageName = "CiderTimeStorageData.txt";
         private readonly string _storagePath = $"{FileSystem.AppDataDirectory}/{_storageName}";
@@ -15,8 +16,10 @@ namespace CiderTimeMaui.Services {
             _permissionsService = permissionsService;
         }
 
-        public async Task<List<Label>> GetDataFromStorage() {
-            try {
+        public async Task<List<Label>> GetDataFromStorage() 
+        {
+            try 
+            {
                 var hasPermission = await _permissionsService.CheckStoragePermissions();
                 if (hasPermission is false) 
                     return new List<Label>();
@@ -25,16 +28,16 @@ namespace CiderTimeMaui.Services {
                 var data = Encoding.UTF8.GetString(bytes);
                 return JsonSerializer.Deserialize<List<Label>>(data);
             }
-            catch (Exception) {
-
+            catch (Exception) 
+            {
                 using var fileStream = File.Create(_storagePath);
                 await fileStream.DisposeAsync();
                 return new List<Label>();
             }
         }
 
-        public async Task WriteDataToStorage(List<Label> labels) {
-            
+        public async Task WriteDataToStorage(List<Label> labels) 
+        {
             var hasPermission = await _permissionsService.CheckStoragePermissions();
             if (hasPermission is false)
                 return;

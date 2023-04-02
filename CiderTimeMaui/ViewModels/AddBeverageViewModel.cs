@@ -24,7 +24,7 @@ namespace CiderTimeMaui.ViewModels
 
         private readonly IDataStorageService _storageService;
         private readonly IMediaService _mediaService;
-        private readonly string _imageUrl = $"{FileSystem.AppDataDirectory}/Media";
+        private readonly string _imageUrl = $"{FileSystem.AppDataDirectory}/media";
 
         public AddBeverageViewModel(IDataStorageService storageService,
             IMediaService mediaService)

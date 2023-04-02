@@ -4,7 +4,7 @@ namespace CiderTimeMaui.Services
 {
     public class MediaService : IMediaService
     {
-        private readonly string _directory = $"{FileSystem.AppDataDirectory}/Media";
+        private readonly string _directory = Path.Combine(FileSystem.Current.AppDataDirectory, "media");
 
         private readonly IPermissionsService _permissionsService;
 
