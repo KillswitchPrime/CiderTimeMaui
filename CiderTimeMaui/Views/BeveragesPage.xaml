@@ -31,15 +31,16 @@
                 <Button Command="{Binding ResetSearchCommand}"
                         Text="Reset"
                         BackgroundColor="Transparent"
-                        BorderColor="White"
-                        TextColor="White"
+                        BorderColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"
                         BorderWidth="1"/>
 
                 <SearchBar SearchCommand="{Binding SearchCommand}"
                            x:Name="searchBar"
                            WidthRequest="240"
                            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-                           Placeholder="Search..."/>
+                           Placeholder="Search..."
+                           TextColor="{AppThemeBinding Light={StaticResource LabelText}, Dark={StaticResource LabelTextDark}}"/>
 
                 <Picker x:Name="sortPicker"
                     Title="Sort"
