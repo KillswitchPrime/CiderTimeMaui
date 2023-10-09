@@ -5,7 +5,8 @@ using CommunityToolkit.Mvvm.Input;
 namespace CiderTimeMaui.ViewModels
 {
     [QueryProperty(nameof(Id), "BeverageId")]
-    public partial class EditBeverageViewModel : ObservableObject
+    public partial class EditBeverageViewModel(IDataStorageService storageService, IMediaService mediaService)
+        : ObservableObject
     {
         [ObservableProperty]
         Guid id;
@@ -21,15 +22,6 @@ namespace CiderTimeMaui.ViewModels
         [ObservableProperty]
         string imageUrl;
 
-        private readonly IDataStorageService _storageService;
-        private readonly IMediaService _mediaService;
-
-        public EditBeverageViewModel(IDataStorageService storageService, IMediaService mediaService)
-        {
-            _storageService = storageService;
-            _mediaService = mediaService;
-        }
-
         [RelayCommand]
         async Task FinishedEditing()
         {
@@ -43,7 +35,7 @@ namespace CiderTimeMaui.ViewModels
                 return;
             }
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             foreach (var beverage in labels.SelectMany(l => l.Beverages).Where(b => b.Id == Id))
             {
@@ -53,7 +45,7 @@ namespace CiderTimeMaui.ViewModels
                 beverage.Price = decimal.TryParse(Price, out var parsedPrice) ? parsedPrice : 0M;
             }
 
-            await _storageService.WriteDataToStorage(labels);
+            await storageService.WriteDataToStorage(labels);
 
             var labelId = labels.FirstOrDefault(l => l.Beverages.Any(b => b.Id == Id)).Id;
             await Shell.Current.GoToAsync("..", true,
@@ -66,13 +58,13 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task GetImage()
         {
-            await _mediaService.GetImage(ImageUrl);
+            await mediaService.GetImage(ImageUrl);
         }
 
         [RelayCommand]
         async Task TakePhoto()
         {
-            await _mediaService.TakePhoto(ImageUrl);
+            await mediaService.TakePhoto(ImageUrl);
         }
 
         [RelayCommand]
@@ -85,12 +77,12 @@ namespace CiderTimeMaui.ViewModels
             if (answer is false)
                 return;
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
             var labelId = labels.FirstOrDefault(l => l.Beverages.Any(b => b.Id == Id)).Id;
 
             labels.ForEach(l => l.Beverages.RemoveAll(b => b.Id == Id));
 
-            await _storageService.WriteDataToStorage(labels);
+            await storageService.WriteDataToStorage(labels);
 
             await Shell.Current.GoToAsync("..", true,
                 new Dictionary<string, object>
@@ -101,7 +93,7 @@ namespace CiderTimeMaui.ViewModels
 
         public async Task GetData()
         {
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             var beverage = labels
                 .SelectMany(l => l.Beverages)

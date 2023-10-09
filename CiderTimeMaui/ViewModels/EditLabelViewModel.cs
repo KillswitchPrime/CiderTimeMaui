@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 namespace CiderTimeMaui.ViewModels
 {
     [QueryProperty(nameof(Id), "LabelId")]
-    public partial class EditLabelViewModel : ObservableObject
+    public partial class EditLabelViewModel(IDataStorageService storageService) : ObservableObject
     {
         [ObservableProperty]
         Guid id;
@@ -14,13 +14,6 @@ namespace CiderTimeMaui.ViewModels
         string name;
         [ObservableProperty]
         string description;
-
-        private readonly IDataStorageService _storageService;
-
-        public EditLabelViewModel(IDataStorageService storageService)
-        {
-            _storageService = storageService;
-        }
 
         [RelayCommand]
         async Task FinishedEditing()
@@ -31,7 +24,7 @@ namespace CiderTimeMaui.ViewModels
                 return;
             }
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             foreach(var label in labels.Where(x => x.Id == Id))
             {
@@ -39,7 +32,7 @@ namespace CiderTimeMaui.ViewModels
                 label.Description = Description;
             }
 
-            await _storageService.WriteDataToStorage(labels);
+            await storageService.WriteDataToStorage(labels);
 
             await Shell.Current.GoToAsync("..", true);
         }
@@ -54,18 +47,18 @@ namespace CiderTimeMaui.ViewModels
             if (answer is false)
                 return;
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             labels.RemoveAll(x => x.Id == Id);
 
-            await _storageService.WriteDataToStorage(labels);
+            await storageService.WriteDataToStorage(labels);
 
             await Shell.Current.GoToAsync($"///{nameof(MainPage)}", true);
         }
 
         public async Task GetData()
         {
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             var label = labels.FirstOrDefault(x => x.Id == Id);
 

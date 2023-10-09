@@ -7,21 +7,13 @@ using Label = CiderTimeMaui.Models.Label;
 
 namespace CiderTimeMaui.ViewModels
 {
-    public partial class AddLabelViewModel : ObservableObject
+    public partial class AddLabelViewModel(IDataStorageService storageService) : ObservableObject
     {
         [ObservableProperty]
         string name;
         [ObservableProperty]
         string description;
-
-        private readonly IDataStorageService _storageService;
-
-        public AddLabelViewModel(IDataStorageService storageService)
-        {
-            _storageService = storageService;
-        }
-
-
+        
         [RelayCommand]
         async Task AddLabel()
         {
@@ -39,11 +31,11 @@ namespace CiderTimeMaui.ViewModels
                 Beverages = new List<Beverage>()
             };
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             labels.Add(label);
 
-            await _storageService.WriteDataToStorage(labels);
+            await storageService.WriteDataToStorage(labels);
 
             await Shell.Current.GoToAsync($"///{nameof(MainPage)}", true);
         }

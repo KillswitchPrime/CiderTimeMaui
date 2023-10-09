@@ -7,27 +7,18 @@ using Label = CiderTimeMaui.Models.Label;
 
 namespace CiderTimeMaui.ViewModels
 {
-    public partial class LabelsViewModel : ObservableObject
+    public partial class LabelsViewModel(IDataStorageService dataStorageService) : ObservableObject
     {
         public ObservableCollection<Label> Labels { get; } = new();
-        private readonly IDataStorageService _dataStorageService;
-
-        public LabelsViewModel(IDataStorageService dataStorageService)
-        {
-            _dataStorageService = dataStorageService;
-        }
 
         public async Task GetData()
         {
             Labels.Clear();
 
-            var labels = await _dataStorageService.GetDataFromStorage();
-
+            var labels = await dataStorageService.GetDataFromStorage();
+            
             foreach (var label in labels.OrderBy(x => x.Name))
             {
-                if (label is null)
-                    continue;
-
                 Labels.Add(label);
             }
         }
@@ -67,21 +58,21 @@ namespace CiderTimeMaui.ViewModels
 
             var formattedSearchQuery = searchQuery.ToUpper().Trim();
 
-            var labels = await _dataStorageService.GetDataFromStorage();
+            var labels = await dataStorageService.GetDataFromStorage();
 
             var searchedLabels = new List<Label>();
             foreach(var label in labels)
             {
-                if (label.Name.ToUpper().Contains(formattedSearchQuery) || 
-                   (!string.IsNullOrWhiteSpace(label.Description) && label.Description.ToUpper().Contains(formattedSearchQuery)))
+                if (label.Name.Contains(formattedSearchQuery, StringComparison.CurrentCultureIgnoreCase) || 
+                   (!string.IsNullOrWhiteSpace(label.Description) && label.Description.Contains(formattedSearchQuery, StringComparison.CurrentCultureIgnoreCase)))
                     searchedLabels.Add(label);
 
                 else if (label.Beverages.Count < 1)
                     continue;
 
                 else if(label.Beverages.Any(b => 
-                        b.Name.ToUpper().Contains(formattedSearchQuery) || 
-                        (!string.IsNullOrWhiteSpace(b.Description) && b.Description.ToUpper().Contains(formattedSearchQuery))))
+                        b.Name.Contains(formattedSearchQuery, StringComparison.CurrentCultureIgnoreCase) || 
+                        (!string.IsNullOrWhiteSpace(b.Description) && b.Description.Contains(formattedSearchQuery, StringComparison.CurrentCultureIgnoreCase))))
                     searchedLabels.Add(label);
             }
 
@@ -116,8 +107,8 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task RecommendDrink()
         {
-            var title = "Sorry!";
-            var message = "No drinks to recommend!";
+            const string title = "Sorry!";
+            const string message = "No drinks to recommend!";
 
             if (Labels.Count < 1) {
                 await Shell.Current.DisplayAlert(title, message, "OK");

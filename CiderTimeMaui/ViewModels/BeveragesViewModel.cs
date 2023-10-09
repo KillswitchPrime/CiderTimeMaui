@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 namespace CiderTimeMaui.ViewModels
 {
     [QueryProperty(nameof(LabelId), "LabelId")]
-    public partial class BeveragesViewModel : ObservableObject
+    public partial class BeveragesViewModel(IDataStorageService storageService) : ObservableObject
     {
         public ObservableCollection<Beverage> Beverages { get; } = new();
 
@@ -17,13 +17,6 @@ namespace CiderTimeMaui.ViewModels
 
         [ObservableProperty]
         string labelName;
-
-        private readonly IDataStorageService _storageService;
-
-        public BeveragesViewModel(IDataStorageService storageService)
-        {
-            _storageService = storageService;
-        }
 
         [RelayCommand]
         async Task GoToAddBeverage()
@@ -66,7 +59,7 @@ namespace CiderTimeMaui.ViewModels
 
             var formattedSearchQuery = searchQuery.ToUpper().Trim();
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             var beverages = labels.FirstOrDefault(l => l.Id == LabelId).Beverages;
 
@@ -92,12 +85,12 @@ namespace CiderTimeMaui.ViewModels
         {
             Beverages.Clear();
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             var currentLabel = labels.FirstOrDefault(l => l.Id == LabelId);
             LabelName = currentLabel.Name;
 
-            if (currentLabel.Beverages.Any() is false)
+            if (currentLabel.Beverages.Count is 0)
                 return;
 
             foreach(var beverage in currentLabel.Beverages.OrderBy(x => x.Name))

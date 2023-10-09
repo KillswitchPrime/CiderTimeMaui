@@ -6,7 +6,10 @@ using CommunityToolkit.Mvvm.Input;
 namespace CiderTimeMaui.ViewModels
 {
     [QueryProperty(nameof(LabelId), "LabelId")]
-    public partial class AddBeverageViewModel : ObservableObject
+    public partial class AddBeverageViewModel(
+            IDataStorageService storageService,
+            IMediaService mediaService)
+        : ObservableObject
     {
         [ObservableProperty]
         Guid labelId;
@@ -22,16 +25,7 @@ namespace CiderTimeMaui.ViewModels
         [ObservableProperty]
         Guid imageId = Guid.NewGuid();
 
-        private readonly IDataStorageService _storageService;
-        private readonly IMediaService _mediaService;
         private readonly string _imageUrl = $"{FileSystem.AppDataDirectory}/media";
-
-        public AddBeverageViewModel(IDataStorageService storageService,
-            IMediaService mediaService)
-        {
-            _storageService = storageService;
-            _mediaService = mediaService;
-        }
 
         [RelayCommand]
         async Task AddBeverage()
@@ -56,12 +50,12 @@ namespace CiderTimeMaui.ViewModels
                 ImageUrl = $"{_imageUrl}/{ImageId}.jpg"
             };
 
-            var labels = await _storageService.GetDataFromStorage();
+            var labels = await storageService.GetDataFromStorage();
 
             foreach(var label in labels.Where(x => x.Id == LabelId))
                 label.Beverages.Add(beverage);
 
-            await _storageService.WriteDataToStorage(labels);
+            await storageService.WriteDataToStorage(labels);
 
             await Shell.Current.GoToAsync("..", true);
         }
@@ -69,13 +63,13 @@ namespace CiderTimeMaui.ViewModels
         [RelayCommand]
         async Task GetImage()
         {
-            await _mediaService.GetImage($"{_imageUrl}/{ImageId}");
+            await mediaService.GetImage($"{_imageUrl}/{ImageId}");
         }
 
         [RelayCommand]
         async Task TakePhoto()
         {
-            await _mediaService.TakePhoto($"{_imageUrl}/{ImageId}");
+            await mediaService.TakePhoto($"{_imageUrl}/{ImageId}");
         }
     }
 }

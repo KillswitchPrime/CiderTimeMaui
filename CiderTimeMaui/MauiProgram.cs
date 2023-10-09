@@ -21,26 +21,18 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        builder.Services.AddSingleton<MainPage>();
+		// Services
         builder.Services.AddSingleton<IDataStorageService, DataStorageService>();
 		builder.Services.AddSingleton<IMediaService, MediaService>();
 		builder.Services.AddScoped<IPermissionsService, PermissionsService>();
-		builder.Services.AddSingleton<LabelsViewModel>();
 
-		builder.Services.AddTransient<AddLabelViewModel>();
-		builder.Services.AddTransient<AddLabelPage>();
-
-		builder.Services.AddTransient<BeveragesPage>();
-		builder.Services.AddTransient<BeveragesViewModel>();
-
-		builder.Services.AddTransient<AddBeveragePage>();
-		builder.Services.AddTransient<AddBeverageViewModel>();
-
-        builder.Services.AddTransient<EditBeveragePage>();
-        builder.Services.AddTransient<EditBeverageViewModel>();
-
-        builder.Services.AddTransient<EditLabelPage>();
-        builder.Services.AddTransient<EditLabelViewModel>();
+		// Views and ViewModels
+        builder.Services.AddSingleton<MainPage, LabelsViewModel>();
+		builder.Services.AddTransient<AddLabelPage, AddLabelViewModel>();
+		builder.Services.AddTransient<BeveragesPage, BeveragesViewModel>();
+		builder.Services.AddTransient<AddBeveragePage, AddBeverageViewModel>();
+        builder.Services.AddTransient<EditBeveragePage, EditBeverageViewModel>();
+        builder.Services.AddTransient<EditLabelPage, EditLabelViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();
