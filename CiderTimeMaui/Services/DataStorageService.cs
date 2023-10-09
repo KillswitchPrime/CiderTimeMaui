@@ -19,11 +19,12 @@ namespace CiderTimeMaui.Services
 
                 var bytes = await File.ReadAllBytesAsync(_storagePath);
                 var data = Encoding.UTF8.GetString(bytes);
+                
                 return JsonSerializer.Deserialize<List<Label>>(data);
             }
             catch (Exception) 
             {
-                using var fileStream = File.Create(_storagePath);
+                await using var fileStream = File.Create(_storagePath);
                 await fileStream.DisposeAsync();
                 return new List<Label>();
             }
